@@ -1,0 +1,25 @@
+{
+  "name": "img-processing",
+  "version": "1.0.0",
+  "description": "SDK for image processing",
+  "keywords": ["img processing", "image processing", "api", "sdk"],
+  "homepage": "https://img-processing.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/img-processing/node-sdk/issues"
+  },
+  "author": "IMG Processing <support@img-processing.com> (https://img-processing.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/img-processing/node-sdk.git"
+  },
+  "files": ["dist"],
+  "type": "module",
+  "devDependencies": {
+    "typescript": "5.6.2",
+    "vitest": "2.0.5"
+  },
+  "dependencies": {
+    "ky": "1.7.2"
+  }
+}
