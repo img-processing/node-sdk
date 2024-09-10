@@ -20,6 +20,7 @@
     "vitest": "2.0.5"
   },
   "dependencies": {
+    "file-type": "^19.5.0",
     "ky": "1.7.2"
   }
 }

@@ -1,6 +1,8 @@
 import ky, { HTTPError, type KyInstance } from 'ky';
 import type { ImageObject } from './image-object.js';
 import * as fs from 'node:fs';
+import {fileTypeFromBuffer} from 'file-type';
+import { Blob, type File } from 'node:buffer';
 
 export class IMGProcessingClient {
   protected readonly client: KyInstance;
@@ -29,15 +31,14 @@ export class IMGProcessingClient {
     if (typeof image === 'string') {
       // The image is a file in the file system
       const imageFile = await fs.promises.readFile(image);
-      const signatures: { [key: PropertyKey]: string } = {
-        'ffd8ffe0': 'image/jpeg',
-        '89504e47': 'image/png',
-        '47494638': 'image/gif',
-        '52494646': 'image/webp',
-      };
-      const mimeType = imageFile.slice(0, 4).toString('hex');
+      const mimeType = (await fileTypeFromBuffer(imageFile))?.mime;
       formData.append('image', new Blob([imageFile], {
-        type: signatures[mimeType] || 'application/octet-stream'
+        type: mimeType
+      }));
+    } else if (image instanceof Buffer) {
+      const mimeType = (await fileTypeFromBuffer(image))?.mime;
+      formData.append('image', new Blob([image], {
+        type: mimeType
       }));
     } else {
       formData.append('image', image);
