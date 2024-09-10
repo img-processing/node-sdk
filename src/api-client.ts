@@ -1,4 +1,4 @@
-import ky, { HTTPError, type KyInstance } from 'ky';
+import ky, { HTTPError, type KyInstance, type ResponsePromise } from 'ky';
 import type { ImageObject } from './image-object.js';
 import * as fs from 'node:fs';
 import {fileTypeFromBuffer} from 'file-type';
@@ -9,7 +9,7 @@ export class IMGProcessingClient {
 
   constructor({apiKey}: IMGProcessingClient.ClientOptions) {
     this.client = ky.create({
-      prefixUrl: 'https://api.img-processing.com/v1/images',
+      prefixUrl: 'https://api.img-processing.com/',
       headers: {
         'x-api-key': apiKey,
       }
@@ -23,6 +23,23 @@ export class IMGProcessingClient {
       error: r
     };
   }
+
+  protected async request<T>(call: () => ResponsePromise<T>): Promise<IMGProcessingClient.Response<T>> {
+    try {
+      const response = await call();
+      return {
+        success: true,
+        data: await response.json()
+      };
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        return this.catchResponseError(error.response);
+      }
+      console.error(error);
+      throw new Error('An unexpected error occurred. Create an issue: https://github.com/img-processing/node-sdk/issues');
+    }
+  }
+
 
   async uploadImage({ image, name }: IMGProcessingClient.uploadImage.Options): Promise<IMGProcessingClient.Response<ImageObject>> {
     const formData = new FormData();
@@ -44,23 +61,20 @@ export class IMGProcessingClient {
       formData.append('image', image);
     }
 
-    try {
-      const response = await this.client.post<ImageObject>('upload', {
-        body: formData,
-        headers: {
-        }
-      });
-
-      return {
-        success: true,
-        data: await response.json()
-      };
-    } catch (error) {
-      if (error instanceof HTTPError) {
-        return this.catchResponseError(error.response);
+    return this.request(() => this.client.post('v1/images/upload', {
+      body: formData,
+      headers: {
       }
-      throw new Error('An unexpected error occurred. Create an issue: https://github.com/img-processing/node-sdk/issues');
-    }
+    }));
+  }
+
+  async createImageFromUrl({ url, name }: IMGProcessingClient.createImageFromUrl.Options): Promise<IMGProcessingClient.Response<ImageObject>> {
+    return this.request(() => this.client.post<ImageObject>('v1/images', {
+      json: {
+        url,
+        name
+      }
+    }));
   }
 }
 
@@ -78,7 +92,7 @@ export declare namespace IMGProcessingClient {
 
   type Error = {
     type: string;
-    title: string;
+    error: string;
     status: number;
     message?: string;
     errors?: string[];
@@ -97,11 +111,12 @@ export declare namespace IMGProcessingClient {
       image: Blob | File | FilePath | Buffer;
       name: string;
     }
+  }
 
-    export type Response = {
-      id: string;
-      name: string;
+  namespace createImageFromUrl {
+    export type Options = {
       url: string;
+      name: string;
     }
   }
 }
