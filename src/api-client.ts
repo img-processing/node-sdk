@@ -44,6 +44,28 @@ export class IMGProcessingClient {
 
   /**
    * -----------------------------------------
+   * Analysis
+   * -----------------------------------------
+   */
+
+  /**
+   * Classify an image using a pre-trained model.
+   * At the moment, the only supported model is the [ResNet50](https://keras.io/api/applications/resnet/#resnet50-function) model,
+   * a deep learning model that excels at image classification tasks.
+   */
+  async classify({
+    imageId,
+  }: IMGProcessingClient.classify.Params): Promise<IMGProcessingClient.classify.Response> {
+    return this.request(() =>
+      this.client.post(`v1/images/${imageId}/classify`, {
+        json: {},
+      }),
+    );
+  }
+
+
+  /**
+   * -----------------------------------------
    * Creation
    * -----------------------------------------
    */
@@ -544,6 +566,26 @@ export declare namespace IMGProcessingClient {
       imageId: string;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
+    };
+  }
+
+  export namespace classify {
+    export type Params = {
+      /** The ID of the image to classify. */
+      imageId: string;
+    };
+    export type Response = {
+      /** The main label of the image. This is the label with the highest probability. */
+      main_label: string;
+      /** The score of the main label. The score is a number between 0 and 1, where 1 is the highest probability. */
+      main_score: number;
+      /** A list of labels and their probabilities for the image. */
+      labels: {
+        /** The label of the image. */
+        label: string;
+        /** The probability of the label. The probability is a number between 0 and 1, where 1 is the highest probability. */
+        score: number;
+      }[];
     };
   }
 }

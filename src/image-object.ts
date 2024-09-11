@@ -36,6 +36,21 @@ export class ImageObject<
 
   /**
    * -----------------------------------------
+   * Analysis
+   * -----------------------------------------
+   */
+
+  /**
+   * Classify an image using a pre-trained model.
+   * At the moment, the only supported model is the [ResNet50](https://keras.io/api/applications/resnet/#resnet50-function) model,
+   * a deep learning model that excels at image classification tasks.
+   */
+  async classify(): Promise<ImageObject.classify.Response> {
+    return await this.client.classify({ imageId: this.id });
+  }
+
+  /**
+   * -----------------------------------------
    * Edition
    * -----------------------------------------
    */
@@ -284,5 +299,8 @@ export declare namespace ImageObject {
   export namespace removeBackground {
     export type Params =
       WithoutImageId<IMGProcessingClient.removeBackground.Params>;
+  }
+  export namespace classify {
+    export type Response = IMGProcessingClient.classify.Response;
   }
 }
