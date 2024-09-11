@@ -9,6 +9,11 @@ export class IMGProcessingClient {
   protected readonly client: KyInstance;
 
   constructor({ apiKey }: IMGProcessingClient.ClientOptions) {
+    if (!apiKey.startsWith("test_") && !apiKey.startsWith("live_")) {
+      throw new Error(
+        "Invalid API key. Please provide a valid API key. If you don't have one, you can get one at https://dashboard.img-processing.com/",
+      );
+    }
     this.client = ky.create({
       prefixUrl: "https://api.img-processing.com/",
       headers: {
@@ -41,6 +46,34 @@ export class IMGProcessingClient {
       client: this,
     }) as ImageObject<Format>;
   }
+
+  /**
+   * -----------------------------------------
+   * Access
+   * -----------------------------------------
+   */
+
+  /**
+   * Download an image by its unique identifier.
+   * The image is returned as a binary response.
+   */
+  async download({
+    imageId,
+  }: IMGProcessingClient.download.Params): Promise<Blob> {
+    try {
+      const response = await this.client.get(`v1/images/${imageId}/download`)
+      return await response.blob();
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        throw new IMGProcessingAPIError(await error.response.json());
+      }
+      console.error(error);
+      throw new Error(
+        "An unexpected error occurred. Create an issue: https://github.com/img-processing/node-sdk/issues",
+      );
+    }
+  }
+
 
   /**
    * -----------------------------------------
@@ -383,10 +416,11 @@ export class IMGProcessingClient {
 }
 
 export declare namespace IMGProcessingClient {
-  export type APIKey = `live_${string}` | `test_${string}`;
+  export type LiveOrTestAPIKey = string;
+  export type ImageId = string;
 
   export type ClientOptions = {
-    apiKey: APIKey;
+    apiKey: LiveOrTestAPIKey;
   };
 
   export type Error = {
@@ -430,7 +464,7 @@ export declare namespace IMGProcessingClient {
   export namespace resize {
     export type Params = {
       /** The ID of the image to resize. */
-      imageId: string;
+      imageId: ImageId;
       /** The desired width of the resized image in pixels. */
       width: number;
       /** The desired height of the resized image in pixels. */
@@ -465,7 +499,7 @@ export declare namespace IMGProcessingClient {
   export namespace crop {
     export type Params = {
       /** The ID of the image to crop. */
-      imageId: string;
+      imageId: ImageId;
       /** The x-coordinate of the top-left corner of the crop area. */
       x1: number;
       /** The y-coordinate of the top-left corner of the crop area. */
@@ -489,7 +523,7 @@ export declare namespace IMGProcessingClient {
     export type Mode = "horizontal" | "vertical" | "both";
     export type Params = {
       /** The ID of the image to mirror. */
-      imageId: string;
+      imageId: ImageId;
       /** /*** The mirror mode to apply to the image. */
       mode: Mode;
       /** The name of the image. If not provided, the original image name will be used. */
@@ -500,7 +534,7 @@ export declare namespace IMGProcessingClient {
   export namespace convert {
     export type Params<Format extends ImageObject.SupportedFormat> = {
       /** The ID of the image to convert. */
-      imageId: string;
+      imageId: ImageId;
       /** The format to convert the image to. */
       format: Format;
       /** The quality of the converted image if the target format is `jpeg`. */
@@ -513,7 +547,7 @@ export declare namespace IMGProcessingClient {
   export namespace rotate {
     export type Params = {
       /** The ID of the image to rotate. */
-      imageId: string;
+      imageId: ImageId;
       /** The angle in degrees or radians rotate the image. */
       angle: number;
       /** The unit of the angle. Default is `degrees`. */
@@ -528,11 +562,11 @@ export declare namespace IMGProcessingClient {
   export namespace watermark {
     export type Params = {
       /** The ID of the image to add watermarks. */
-      imageId: string;
+      imageId: ImageId;
       /** An array of watermark objects to apply to the image. */
       watermarks: {
         /** The unique identifier of the image to use as a watermark. */
-        id: string;
+        id: ImageId;
         /** The position of the watermark from the left of the image to apply the watermark. */
         left: number;
         /** The position of the watermark from the top of the image to apply the watermark. */
@@ -546,7 +580,7 @@ export declare namespace IMGProcessingClient {
   export namespace modulate {
     export type Params = {
       /** The ID of the image to adjust the brightness, saturation, and hue. */
-      imageId: string;
+      imageId: ImageId;
       /** The brightness multiplier to apply to the image. The difference between the `brightness` and `lightness` parameters is that `brightness` multiplies the color values, while `lightness` adds a constant value to the color values. */
       brightness?: number;
       /** The saturation multiplier to apply to the image. */
@@ -563,7 +597,7 @@ export declare namespace IMGProcessingClient {
   export namespace removeBackground {
     export type Params = {
       /** The ID of the image to remove the background. */
-      imageId: string;
+      imageId: ImageId;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
     };
@@ -572,7 +606,7 @@ export declare namespace IMGProcessingClient {
   export namespace classify {
     export type Params = {
       /** The ID of the image to classify. */
-      imageId: string;
+      imageId: ImageId;
     };
     export type Response = {
       /** The main label of the image. This is the label with the highest probability. */
@@ -586,6 +620,13 @@ export declare namespace IMGProcessingClient {
         /** The probability of the label. The probability is a number between 0 and 1, where 1 is the highest probability. */
         score: number;
       }[];
+    };
+  }
+
+  export namespace download {
+    export type Params = {
+      /** The unique identifier of the image to download. */
+      imageId: ImageId;
     };
   }
 }

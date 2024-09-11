@@ -1,5 +1,6 @@
 import type { IMGProcessingClient } from "./api-client.js";
 import type { WithoutImageId } from "./types.js";
+import { type Blob } from "node:buffer";
 
 /**
  * The Image object represents an image processed using the IMG Processing API. The object contains
@@ -32,6 +33,20 @@ export class ImageObject<
     this.size = image.size;
     this.created_at = image.created_at;
     this.client = client;
+  }
+
+  /**
+   * -----------------------------------------
+   * Access
+   * -----------------------------------------
+   */
+
+  /**
+   * Download an image by its unique identifier.
+   * The image is returned as a binary response.
+   */
+  async download(): Promise<Blob> {
+    return await this.client.download({ imageId: this.id });
   }
 
   /**
@@ -237,6 +252,8 @@ export class ImageObject<
 export declare namespace ImageObject {
   /** IMG Processing API image supported formats. */
   export type SupportedFormat = "jpeg" | "png" | "webp";
+  /** Id of an Image object */
+  export type ImageId = `image_${string}`;
   /**
    * The Image object represents an image processed using the IMG Processing API. The object contains
    * information about the image, such as its URL, size, and format. The Image object is returned in the response body of
@@ -244,7 +261,7 @@ export declare namespace ImageObject {
    */
   export type Image<Format extends SupportedFormat = SupportedFormat> = {
     /** The unique identifier of the image. This identifier is used to reference the image in subsequent requests.*/
-    id: `image_${string}`;
+    id: ImageId;
     /** The name of the image. This name is provided when uploading the image and is the way
      the image is identified in your account. It is not unique, in fact, each transformation you make
      to an image will create a new image with the same name.*/
