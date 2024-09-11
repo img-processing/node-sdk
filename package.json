@@ -5,6 +5,9 @@
   "keywords": ["img processing", "image processing", "api", "sdk"],
   "homepage": "https://img-processing.com",
   "license": "MIT",
+  "scripts": {
+    "check": "bunx biome check --write"
+  },
   "bugs": {
     "url": "https://github.com/img-processing/node-sdk/issues"
   },
@@ -16,6 +19,7 @@
   "files": ["dist"],
   "type": "module",
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "typescript": "5.6.2",
     "vitest": "2.0.5"
   },

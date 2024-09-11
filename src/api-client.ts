@@ -1,19 +1,19 @@
-import ky, { HTTPError, type KyInstance, type ResponsePromise } from 'ky';
-import { ImageObject } from './image-object.js';
-import * as fs from 'node:fs';
-import {fileTypeFromBuffer} from 'file-type';
-import { Blob, type File } from 'node:buffer';
-import { IMGProcessingAPIError } from './api-error.js';
+import { Blob, type File } from "node:buffer";
+import * as fs from "node:fs";
+import { fileTypeFromBuffer } from "file-type";
+import ky, { HTTPError, type KyInstance, type ResponsePromise } from "ky";
+import { IMGProcessingAPIError } from "./api-error.js";
+import { ImageObject } from "./image-object.js";
 
 export class IMGProcessingClient {
   protected readonly client: KyInstance;
 
-  constructor({apiKey}: IMGProcessingClient.ClientOptions) {
+  constructor({ apiKey }: IMGProcessingClient.ClientOptions) {
     this.client = ky.create({
-      prefixUrl: 'https://api.img-processing.com/',
+      prefixUrl: "https://api.img-processing.com/",
       headers: {
-        'x-api-key': apiKey,
-      }
+        "x-api-key": apiKey,
+      },
     });
   }
 
@@ -26,50 +26,71 @@ export class IMGProcessingClient {
         throw new IMGProcessingAPIError(await error.response.json());
       }
       console.error(error);
-      throw new Error('An unexpected error occurred. Create an issue: https://github.com/img-processing/node-sdk/issues');
+      throw new Error(
+        "An unexpected error occurred. Create an issue: https://github.com/img-processing/node-sdk/issues",
+      );
     }
   }
 
-  protected async imageRequest<Format extends ImageObject.SupportedFormat = ImageObject.SupportedFormat>(call: () => ResponsePromise<ImageObject>): Promise<ImageObject<Format>> {
+  protected async imageRequest<
+    Format extends ImageObject.SupportedFormat = ImageObject.SupportedFormat,
+  >(call: () => ResponsePromise<ImageObject>): Promise<ImageObject<Format>> {
     const response = await this.request(call);
-    return new ImageObject({ image: response, client: this }) as ImageObject<Format>;
+    return new ImageObject({
+      image: response,
+      client: this,
+    }) as ImageObject<Format>;
   }
 
-
-  async uploadImage({ image, name }: IMGProcessingClient.uploadImage.Params): Promise<ImageObject> {
+  async uploadImage({
+    image,
+    name,
+  }: IMGProcessingClient.uploadImage.Params): Promise<ImageObject> {
     const formData = new FormData();
-    formData.append('name', name);
+    formData.append("name", name);
 
-    if (typeof image === 'string') {
+    if (typeof image === "string") {
       // The image is a file in the file system
       const imageFile = await fs.promises.readFile(image);
       const mimeType = (await fileTypeFromBuffer(imageFile))?.mime;
-      formData.append('image', new Blob([imageFile], {
-        type: mimeType
-      }));
+      formData.append(
+        "image",
+        new Blob([imageFile], {
+          type: mimeType,
+        }),
+      );
     } else if (image instanceof Buffer) {
       const mimeType = (await fileTypeFromBuffer(image))?.mime;
-      formData.append('image', new Blob([image], {
-        type: mimeType
-      }));
+      formData.append(
+        "image",
+        new Blob([image], {
+          type: mimeType,
+        }),
+      );
     } else {
-      formData.append('image', image);
+      formData.append("image", image);
     }
 
-    return this.imageRequest(() => this.client.post('v1/images/upload', {
-      body: formData,
-      headers: {
-      }
-    }));
+    return this.imageRequest(() =>
+      this.client.post("v1/images/upload", {
+        body: formData,
+        headers: {},
+      }),
+    );
   }
 
-  async createImageFromUrl({ url, name }: IMGProcessingClient.createImageFromUrl.Params): Promise<ImageObject> {
-    return this.imageRequest(() => this.client.post<ImageObject>('v1/images', {
-      json: {
-        url,
-        name
-      }
-    }));
+  async createImageFromUrl({
+    url,
+    name,
+  }: IMGProcessingClient.createImageFromUrl.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>("v1/images", {
+        json: {
+          url,
+          name,
+        },
+      }),
+    );
   }
 
   /**
@@ -84,13 +105,19 @@ export class IMGProcessingClient {
    * - **WebP:** A modern image format that provides superior lossless and lossy compression for images on the web.
    * WebP images are smaller compared to JPEG and PNG, while maintaining similar or better image quality.
    */
-  async convert<Format extends ImageObject.SupportedFormat>({ imageId, format, name }: IMGProcessingClient.convert.Params<Format>): Promise<ImageObject<Format>> {
-    return this.imageRequest(() => this.client.post<ImageObject<Format>>(`v1/images/${imageId}/convert`, {
-      json: {
-        format,
-        name
-      }
-    }));
+  async convert<Format extends ImageObject.SupportedFormat>({
+    imageId,
+    format,
+    name,
+  }: IMGProcessingClient.convert.Params<Format>): Promise<ImageObject<Format>> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject<Format>>(`v1/images/${imageId}/convert`, {
+        json: {
+          format,
+          name,
+        },
+      }),
+    );
   }
 
   /**
@@ -98,16 +125,25 @@ export class IMGProcessingClient {
    *
    * The crop area is defined by 2 points: the top-left corner at `(x1, y1)` and the bottom-right corner at `(x2, y2)`.
    */
-  async crop({ imageId, x1, y1, x2, y2, name }: IMGProcessingClient.crop.Params): Promise<ImageObject> {
-    return this.imageRequest(() => this.client.post<ImageObject>(`v1/images/${imageId}/crop`, {
-      json: {
-        x1,
-        y1,
-        x2,
-        y2,
-        name
-      }
-    }));
+  async crop({
+    imageId,
+    x1,
+    y1,
+    x2,
+    y2,
+    name,
+  }: IMGProcessingClient.crop.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>(`v1/images/${imageId}/crop`, {
+        json: {
+          x1,
+          y1,
+          x2,
+          y2,
+          name,
+        },
+      }),
+    );
   }
 
   /**
@@ -117,13 +153,19 @@ export class IMGProcessingClient {
    * image vertically means that the image is mirrored along the horizontal axis. You can also mirror an image
    * horizontally and vertically at the same time using the mode `both`.
    */
-  async mirror({ imageId, mode, name }: IMGProcessingClient.mirror.Params): Promise<ImageObject> {
-    return this.imageRequest(() => this.client.post<ImageObject>(`v1/images/${imageId}/mirror`, {
-      json: {
-        mode,
-        name
-      }
-    }));
+  async mirror({
+    imageId,
+    mode,
+    name,
+  }: IMGProcessingClient.mirror.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>(`v1/images/${imageId}/mirror`, {
+        json: {
+          mode,
+          name,
+        },
+      }),
+    );
   }
 
   /**
@@ -140,29 +182,45 @@ export class IMGProcessingClient {
    * Additionally, you can specify the background color for the letterbox when using the `contain` fit mode, and
    * the gravity for cropping or positioning the image when using the `cover` and `contain` fit modes.
    */
-  async resize({ imageId, width, height, fit, name, position }: IMGProcessingClient.resize.Params): Promise<ImageObject> {
-    return this.imageRequest(() => this.client.post<ImageObject>(`v1/images/${imageId}/resize`, {
-      json: {
-        width,
-        height,
-        fit,
-        name,
-        position
-      }
-    }));
+  async resize({
+    imageId,
+    width,
+    height,
+    fit,
+    name,
+    position,
+  }: IMGProcessingClient.resize.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>(`v1/images/${imageId}/resize`, {
+        json: {
+          width,
+          height,
+          fit,
+          name,
+          position,
+        },
+      }),
+    );
   }
 
   /**
    * Rotate an existing image by a specified angle.
    */
-  async rotate({ imageId, angle, unit, name }: IMGProcessingClient.rotate.Params): Promise<ImageObject> {
-    return this.imageRequest(() => this.client.post<ImageObject>(`v1/images/${imageId}/rotate`, {
-      json: {
-        angle,
-        unit,
-        name
-      }
-    }));
+  async rotate({
+    imageId,
+    angle,
+    unit,
+    name,
+  }: IMGProcessingClient.rotate.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>(`v1/images/${imageId}/rotate`, {
+        json: {
+          angle,
+          unit,
+          name,
+        },
+      }),
+    );
   }
 }
 
@@ -171,7 +229,7 @@ export declare namespace IMGProcessingClient {
 
   export type ClientOptions = {
     apiKey: APIKey;
-  }
+  };
 
   export type Error = {
     type: string;
@@ -179,21 +237,21 @@ export declare namespace IMGProcessingClient {
     status: number;
     message?: string;
     errors?: string[];
-  }
+  };
 
   export namespace uploadImage {
     type FilePath = string;
     export type Params = {
       image: Blob | File | FilePath | Buffer;
       name: string;
-    }
+    };
   }
 
   export namespace createImageFromUrl {
     export type Params = {
       url: string;
       name: string;
-    }
+    };
   }
 
   export namespace resize {
@@ -211,15 +269,24 @@ export declare namespace IMGProcessingClient {
        * - `contain`: This mode will resize the image to fit within the specified width and height. The image will not be stretched.
        * - `cover`: This mode will resize the image to cover the specified width and height. The image will be stretched to fit the dimensions.
        * */
-      fit?: 'fill' | 'contain' | 'cover';
+      fit?: "fill" | "contain" | "cover";
       /** The color of the letterbox when using the `contain` fit mode.
        It can be a color name, a hex color code, or `transparent`. */
       letterbox_color?: string;
       /** The position of the image when using the `cover` or `contain` fit modes. */
-      position?: 'center' | 'top' | 'right' | 'bottom' | 'left' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+      position?:
+        | "center"
+        | "top"
+        | "right"
+        | "bottom"
+        | "left"
+        | "top-left"
+        | "top-right"
+        | "bottom-left"
+        | "bottom-right";
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
-    }
+    };
   }
 
   export namespace crop {
@@ -236,7 +303,7 @@ export declare namespace IMGProcessingClient {
       y2: number;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
-    }
+    };
   }
 
   export namespace mirror {
@@ -246,7 +313,7 @@ export declare namespace IMGProcessingClient {
      * - `vertical`: Mirror the image along the horizontal axis.
      * - `both`: Mirror the image along both axes.
      */
-    export type Mode = 'horizontal' | 'vertical' | 'both';
+    export type Mode = "horizontal" | "vertical" | "both";
     export type Params = {
       /** The ID of the image to mirror. */
       imageId: string;
@@ -254,7 +321,7 @@ export declare namespace IMGProcessingClient {
       mode: Mode;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
-    }
+    };
   }
 
   export namespace convert {
@@ -267,7 +334,7 @@ export declare namespace IMGProcessingClient {
       quality?: number;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
-    }
+    };
   }
 
   export namespace rotate {
@@ -277,11 +344,11 @@ export declare namespace IMGProcessingClient {
       /** The angle in degrees or radians rotate the image. */
       angle: number;
       /** The unit of the angle. Default is `degrees`. */
-      unit?: 'degrees' | 'radians';
+      unit?: "degrees" | "radians";
       /** The background color to fill the empty areas after rotating the image. Default is `#000000`. */
       background_color?: string;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
-    }
+    };
   }
 }

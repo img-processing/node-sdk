@@ -1,12 +1,15 @@
-import { IMGProcessingClient } from './api-client.js';
-import type { WithoutImageId } from './types.js';
+import type { IMGProcessingClient } from "./api-client.js";
+import type { WithoutImageId } from "./types.js";
 
 /**
  * The Image object represents an image processed using the IMG Processing API. The object contains
  * information about the image, such as its URL, size, and format. The Image object is returned in the response body of
  * all image processing requests.
  */
-export class ImageObject<Format extends ImageObject.SupportedFormat = ImageObject.SupportedFormat> implements ImageObject.Image<Format> {
+export class ImageObject<
+  Format extends ImageObject.SupportedFormat = ImageObject.SupportedFormat,
+> implements ImageObject.Image<Format>
+{
   public readonly id: `image_${string}`;
   public readonly name: string;
   public readonly url: string | null;
@@ -43,12 +46,16 @@ export class ImageObject<Format extends ImageObject.SupportedFormat = ImageObjec
    * - **WebP:** A modern image format that provides superior lossless and lossy compression for images on the web.
    * WebP images are smaller compared to JPEG and PNG, while maintaining similar or better image quality.
    */
-  async convert({ format, quality, name }: ImageObject.convert.Params): Promise<ImageObject> {
+  async convert({
+    format,
+    quality,
+    name,
+  }: ImageObject.convert.Params): Promise<ImageObject> {
     return await this.client.convert({
       imageId: this.id,
       format,
       quality,
-      name
+      name,
     });
   }
 
@@ -57,14 +64,20 @@ export class ImageObject<Format extends ImageObject.SupportedFormat = ImageObjec
    *
    * The crop area is defined by 2 points: the top-left corner at `(x1, y1)` and the bottom-right corner at `(x2, y2)`.
    */
-  async crop({ x1, y1, x2, y2, name }: ImageObject.crop.Params): Promise<ImageObject> {
+  async crop({
+    x1,
+    y1,
+    x2,
+    y2,
+    name,
+  }: ImageObject.crop.Params): Promise<ImageObject> {
     return await this.client.crop({
       imageId: this.id,
       x1,
       y1,
       x2,
       y2,
-      name
+      name,
     });
   }
 
@@ -76,11 +89,14 @@ export class ImageObject<Format extends ImageObject.SupportedFormat = ImageObjec
    * You can also mirror an image
    * horizontally and vertically at the same time using the mode `both`.
    */
-  async mirror({ mode, name }: IMGProcessingClient.mirror.Params): Promise<ImageObject> {
+  async mirror({
+    mode,
+    name,
+  }: IMGProcessingClient.mirror.Params): Promise<ImageObject> {
     return await this.client.mirror({
       imageId: this.id,
       mode,
-      name
+      name,
     });
   }
 
@@ -101,27 +117,32 @@ export class ImageObject<Format extends ImageObject.SupportedFormat = ImageObjec
   async resize(options: ImageObject.resize.Params): Promise<ImageObject> {
     return await this.client.resize({
       imageId: this.id,
-      ...options
+      ...options,
     });
   }
 
   /**
    * Rotate an existing image by a specified angle.
    */
-  async rotate({ angle, unit, name, background_color }: ImageObject.rotate.Params): Promise<ImageObject> {
+  async rotate({
+    angle,
+    unit,
+    name,
+    background_color,
+  }: ImageObject.rotate.Params): Promise<ImageObject> {
     return await this.client.rotate({
       imageId: this.id,
       angle,
       unit,
       name,
-      background_color
+      background_color,
     });
   }
 }
 
 export declare namespace ImageObject {
   /** IMG Processing API image supported formats. */
-  export type SupportedFormat = 'jpeg' | 'png' | 'webp';
+  export type SupportedFormat = "jpeg" | "png" | "webp";
   /**
    * The Image object represents an image processed using the IMG Processing API. The object contains
    * information about the image, such as its URL, size, and format. The Image object is returned in the response body of
@@ -149,13 +170,15 @@ export declare namespace ImageObject {
     size: number;
     /** The date and time when the image was created. The date and time are in ISO 8601 format. */
     created_at: string;
-  }
-  export type ConstructorProps<Format extends SupportedFormat = SupportedFormat> = {
+  };
+  export type ConstructorProps<
+    Format extends SupportedFormat = SupportedFormat,
+  > = {
     /** The IMG Processing API image object. */
     image: Image<Format>;
     /** The client used to interact with the IMG Processing API. */
     client: IMGProcessingClient;
-  }
+  };
   export namespace resize {
     export type Params = WithoutImageId<IMGProcessingClient.resize.Params>;
   }

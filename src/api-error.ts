@@ -5,7 +5,13 @@ export class IMGProcessingAPIError {
   message?: string;
   errors?: string[];
 
-  constructor({type, error, status, message, errors}: IMGProcessingAPIError.Options) {
+  constructor({
+    type,
+    error,
+    status,
+    message,
+    errors,
+  }: IMGProcessingAPIError.Options) {
     this.type = type;
     this.error = error;
     this.status = status;
@@ -21,5 +27,5 @@ declare namespace IMGProcessingAPIError {
     status: number;
     message?: string;
     errors?: string[];
-  }
+  };
 }
