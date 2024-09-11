@@ -42,6 +42,18 @@ export class IMGProcessingClient {
     }) as ImageObject<Format>;
   }
 
+  /**
+   * -----------------------------------------
+   * Creation
+   * -----------------------------------------
+   */
+
+  /**
+   * The first step to start processing images with the IMG Processing API is
+   * to create an {@link ImageObject} object.
+   *
+   * This function allows you to create an Image object by uploading an image.
+   */
   async uploadImage({
     image,
     name,
@@ -79,6 +91,14 @@ export class IMGProcessingClient {
     );
   }
 
+  /**
+   * The first step to start processing images with the IMG Processing API is
+   * to create an {@link ImageObject} object.
+   *
+   * This function allows you to create an Image object by downloading an image from a URL.
+   *
+   * Allowed Origins: IMG Processing Storage, Amazon S3, Azure Blob Storage, Cloudflare R2, Dropbox, Google Cloud Storage, Google Drive, OneDrive
+   */
   async createImageFromUrl({
     url,
     name,
@@ -87,6 +107,28 @@ export class IMGProcessingClient {
       this.client.post<ImageObject>("v1/images", {
         json: {
           url,
+          name,
+        },
+      }),
+    );
+  }
+
+  /**
+   * The first step to start processing images with the IMG Processing API is
+   * to create an {@link ImageObject} object.
+   *
+   * This function allows you to generate a new image from a given prompt.
+   */
+  async imagine({
+    prompt,
+    negative_prompt,
+    name,
+  }: IMGProcessingClient.imagine.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>("v1/images/imagine", {
+        json: {
+          prompt,
+          negative_prompt,
           name,
         },
       }),
@@ -336,14 +378,29 @@ export declare namespace IMGProcessingClient {
   export namespace uploadImage {
     type FilePath = string;
     export type Params = {
+      /** The image to upload. */
       image: Blob | File | FilePath | Buffer;
+      /** The name of the image. */
       name: string;
     };
   }
 
   export namespace createImageFromUrl {
     export type Params = {
+      /** The URL of the image to download. */
       url: string;
+      /** The name of the image. */
+      name: string;
+    };
+  }
+
+  export namespace imagine {
+    export type Params = {
+      /** The prompt to generate the image. */
+      prompt: string;
+      /** The things to avoid in the generated image. */
+      negative_prompt?: string;
+      /** The name of the image. */
       name: string;
     };
   }
