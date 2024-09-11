@@ -173,22 +173,12 @@ export declare namespace IMGProcessingClient {
     apiKey: APIKey;
   }
 
-  export type SuccessResponse<T> = {
-    success: true;
-    data: T;
-  }
-
   export type Error = {
     type: string;
     error: string;
     status: number;
     message?: string;
     errors?: string[];
-  }
-
-  export type ErrorResponse = {
-    success: false;
-    error: Error;
   }
 
   export namespace uploadImage {
