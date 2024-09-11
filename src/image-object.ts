@@ -35,6 +35,85 @@ export class ImageObject<
   }
 
   /**
+   * -----------------------------------------
+   * Edition
+   * -----------------------------------------
+   */
+
+  /**
+   * Adjust the brightness, saturation, and hue of an image.
+   *
+   * Brightness is one of the three properties of color, along with hue and saturation. It refers to the amount of light in an image, with a high brightness making the image lighter and a low brightness making the image darker.
+   *
+   * On the other hand, saturation refers to the intensity of the colors in an image. A high saturation value will make the colors more vivid, while a low saturation value will make the colors more muted.
+   *
+   * Finally, hue refers to the color of the image. It is represented as a circular color space, with red, green, and blue forming the primary colors.
+   */
+  async modulate({
+    brightness,
+    saturation,
+    hue,
+    lightness,
+    name,
+  }: ImageObject.modulate.Params): Promise<ImageObject> {
+    return await this.client.modulate({
+      imageId: this.id,
+      brightness,
+      saturation,
+      hue,
+      lightness,
+      name,
+    });
+  }
+
+  /**
+   * Remove the background from an image.
+   * Removing the background from an image can be useful for various purposes, such as creating a transparent background or isolating the subject of the image.
+   *
+   * The background removal process works by segmenting the image into foreground and background regions.
+   * The API uses advanced machine learning algorithms to detect and remove the background from the image, leaving only the foreground subject.
+   */
+  async removeBackground({
+    name,
+  }: ImageObject.removeBackground.Params): Promise<ImageObject<"png">> {
+    return await this.client.removeBackground({
+      imageId: this.id,
+      name,
+    });
+  }
+
+  /**
+   * -----------------------------------------
+   * Multi-image
+   * -----------------------------------------
+   */
+
+  /**
+   * Add watermarks to an image.
+   * Watermarks are a great way to protect your images from unauthorized use and to promote your brand.
+   *
+   * At the moment, you can only add image watermarks to your images.
+   * You must upload your watermark,
+   * apply the transformations, and once you have the desired watermark, apply it to your images using this endpo
+   */
+  async watermark({
+    watermarks,
+    name,
+  }: ImageObject.watermark.Params): Promise<ImageObject> {
+    return await this.client.watermark({
+      imageId: this.id,
+      watermarks,
+      name,
+    });
+  }
+
+  /**
+   * -----------------------------------------
+   * Transformation
+   * -----------------------------------------
+   */
+
+  /**
    * Create a new image by converting an existing image to a different format.
    *
    * The supported image formats are `jpeg`, `png`, and `webp`.
@@ -46,11 +125,11 @@ export class ImageObject<
    * - **WebP:** A modern image format that provides superior lossless and lossy compression for images on the web.
    * WebP images are smaller compared to JPEG and PNG, while maintaining similar or better image quality.
    */
-  async convert({
+  async convert<Format extends ImageObject.SupportedFormat>({
     format,
     quality,
     name,
-  }: ImageObject.convert.Params): Promise<ImageObject> {
+  }: ImageObject.convert.Params<Format>): Promise<ImageObject<Format>> {
     return await this.client.convert({
       imageId: this.id,
       format,
@@ -186,12 +265,24 @@ export declare namespace ImageObject {
     export type Params = WithoutImageId<IMGProcessingClient.crop.Params>;
   }
   export namespace convert {
-    export type Params = WithoutImageId<IMGProcessingClient.convert.Params>;
+    export type Params<Format extends SupportedFormat> = WithoutImageId<
+      IMGProcessingClient.convert.Params<Format>
+    >;
   }
   export namespace mirror {
     export type Params = WithoutImageId<IMGProcessingClient.mirror.Params>;
   }
   export namespace rotate {
     export type Params = WithoutImageId<IMGProcessingClient.rotate.Params>;
+  }
+  export namespace watermark {
+    export type Params = WithoutImageId<IMGProcessingClient.watermark.Params>;
+  }
+  export namespace modulate {
+    export type Params = WithoutImageId<IMGProcessingClient.modulate.Params>;
+  }
+  export namespace removeBackground {
+    export type Params =
+      WithoutImageId<IMGProcessingClient.removeBackground.Params>;
   }
 }

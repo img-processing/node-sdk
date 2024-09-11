@@ -94,6 +94,100 @@ export class IMGProcessingClient {
   }
 
   /**
+   * -----------------------------------------
+   * Edition
+   * -----------------------------------------
+   */
+
+  /**
+   * Adjust the brightness, saturation, and hue of an image.
+   *
+   * Brightness is one of the three properties of color, along with hue and saturation. It refers to the amount of light in an image, with a high brightness making the image lighter and a low brightness making the image darker.
+   *
+   * On the other hand, saturation refers to the intensity of the colors in an image. A high saturation value will make the colors more vivid, while a low saturation value will make the colors more muted.
+   *
+   * Finally, hue refers to the color of the image. It is represented as a circular color space, with red, green, and blue forming the primary colors.
+   */
+  async modulate({
+    imageId,
+    brightness,
+    saturation,
+    hue,
+    lightness,
+    name,
+  }: IMGProcessingClient.modulate.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>(`v1/images/${imageId}/modulate`, {
+        json: {
+          brightness,
+          saturation,
+          hue,
+          lightness,
+          name,
+        },
+      }),
+    );
+  }
+
+  /**
+   * Remove the background from an image.
+   * Removing the background from an image can be useful for various purposes, such as creating a transparent background or isolating the subject of the image.
+   *
+   * The background removal process works by segmenting the image into foreground and background regions.
+   * The API uses advanced machine learning algorithms to detect and remove the background from the image, leaving only the foreground subject.
+   */
+  async removeBackground({
+    imageId,
+    name,
+  }: IMGProcessingClient.removeBackground.Params): Promise<ImageObject<"png">> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject<"png">>(
+        `v1/images/${imageId}/remove-background`,
+        {
+          json: {
+            name,
+          },
+        },
+      ),
+    );
+  }
+
+  /**
+   * -----------------------------------------
+   * Multi-image
+   * -----------------------------------------
+   */
+
+  /**
+   * Add watermarks to an image.
+   * Watermarks are a great way to protect your images from unauthorized use and to promote your brand.
+   *
+   * At the moment, you can only add image watermarks to your images.
+   * You must upload your watermark,
+   * apply the transformations, and once you have the desired watermark, apply it to your images using this endpo
+   */
+  async watermark({
+    imageId,
+    watermarks,
+    name,
+  }: IMGProcessingClient.watermark.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>(`v1/images/${imageId}/watermark`, {
+        json: {
+          watermarks,
+          name,
+        },
+      }),
+    );
+  }
+
+  /**
+   * -----------------------------------------
+   * Transformation
+   * -----------------------------------------
+   */
+
+  /**
    * Create a new image by converting an existing image to a different format.
    *
    * The supported image formats are `jpeg`, `png`, and `webp`.
@@ -347,6 +441,50 @@ export declare namespace IMGProcessingClient {
       unit?: "degrees" | "radians";
       /** The background color to fill the empty areas after rotating the image. Default is `#000000`. */
       background_color?: string;
+      /** The name of the image. If not provided, the original image name will be used. */
+      name?: string;
+    };
+  }
+
+  export namespace watermark {
+    export type Params = {
+      /** The ID of the image to add watermarks. */
+      imageId: string;
+      /** An array of watermark objects to apply to the image. */
+      watermarks: {
+        /** The unique identifier of the image to use as a watermark. */
+        id: string;
+        /** The position of the watermark from the left of the image to apply the watermark. */
+        left: number;
+        /** The position of the watermark from the top of the image to apply the watermark. */
+        top: number;
+      }[];
+      /** The name of the image. If not provided, the original image name will be used. */
+      name?: string;
+    };
+  }
+
+  export namespace modulate {
+    export type Params = {
+      /** The ID of the image to adjust the brightness, saturation, and hue. */
+      imageId: string;
+      /** The brightness multiplier to apply to the image. The difference between the `brightness` and `lightness` parameters is that `brightness` multiplies the color values, while `lightness` adds a constant value to the color values. */
+      brightness?: number;
+      /** The saturation multiplier to apply to the image. */
+      saturation?: number;
+      /** The hue rotation angle in degrees to apply to the image. */
+      hue?: number;
+      /** The lightness to add to the image. The difference between the `brightness` and `lightness` parameters is that `brightness` multiplies the color values, while `lightness` adds a constant value to the color values. */
+      lightness?: number;
+      /** The name of the image. If not provided, the original image name will be used. */
+      name?: string;
+    };
+  }
+
+  export namespace removeBackground {
+    export type Params = {
+      /** The ID of the image to remove the background. */
+      imageId: string;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
     };
