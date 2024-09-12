@@ -1,6 +1,6 @@
+import type { Blob } from "node:buffer";
 import type { IMGProcessingClient } from "./api-client.js";
 import type { WithoutImageId } from "./types.js";
-import { type Blob } from "node:buffer";
 
 /**
  * The Image object represents an image processed using the IMG Processing API. The object contains

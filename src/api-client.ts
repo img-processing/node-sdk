@@ -4,6 +4,7 @@ import { fileTypeFromBuffer } from "file-type";
 import ky, { HTTPError, type KyInstance, type ResponsePromise } from "ky";
 import { IMGProcessingAPIError } from "./api-error.js";
 import { ImageObject } from "./image-object.js";
+import { PaginatedImages } from "./paginated-images.js";
 
 export class IMGProcessingClient {
   protected readonly client: KyInstance;
@@ -61,7 +62,7 @@ export class IMGProcessingClient {
     imageId,
   }: IMGProcessingClient.download.Params): Promise<Blob> {
     try {
-      const response = await this.client.get(`v1/images/${imageId}/download`)
+      const response = await this.client.get(`v1/images/${imageId}/download`);
       return await response.blob();
     } catch (error) {
       if (error instanceof HTTPError) {
@@ -74,6 +75,63 @@ export class IMGProcessingClient {
     }
   }
 
+  /**
+   * Got to the page in the paginated list of images.
+   * @internal
+   */
+  async goToPage<
+    Format extends ImageObject.SupportedFormat = ImageObject.SupportedFormat,
+  >({
+    page,
+  }: IMGProcessingClient.goToPage.Params): Promise<PaginatedImages<Format>> {
+    const urlWithoutDomain = page.replace(
+      "https://api.img-processing.com/",
+      "",
+    );
+    const response = await this.request<PaginatedImages<Format>>(() =>
+      this.client.get(urlWithoutDomain),
+    );
+    return new PaginatedImages({
+      ...response,
+      apiClient: this,
+    });
+  }
+
+  /**
+   * Retrieves an image object by its unique identifier.
+   */
+  async getImage({
+    imageId,
+  }: IMGProcessingClient.getImage.Params): Promise<ImageObject> {
+    return this.imageRequest(() => this.client.get(`v1/images/${imageId}`));
+  }
+
+  /**
+   * Retrieves a list of all the images created by the user.
+   * The images are returned in descending order of creation date, with the most recent images first
+   * in the list.
+   *
+   * Images are paginated, following the [pagination](https://docs.img-processing/api-reference/pagination) rules.
+   */
+  async listImages<
+    Format extends ImageObject.SupportedFormat = ImageObject.SupportedFormat,
+  >({
+    take,
+    from,
+  }: IMGProcessingClient.listImages.Params): Promise<PaginatedImages<Format>> {
+    const response = await this.request<PaginatedImages<Format>>(() =>
+      this.client.get("v1/images", {
+        searchParams: {
+          take: take?.toString() as never,
+          from: from as never,
+        },
+      }),
+    );
+    return new PaginatedImages({
+      ...response,
+      apiClient: this,
+    });
+  }
 
   /**
    * -----------------------------------------
@@ -95,7 +153,6 @@ export class IMGProcessingClient {
       }),
     );
   }
-
 
   /**
    * -----------------------------------------
@@ -627,6 +684,31 @@ export declare namespace IMGProcessingClient {
     export type Params = {
       /** The unique identifier of the image to download. */
       imageId: ImageId;
+    };
+  }
+
+  export namespace getImage {
+    export type Params = {
+      /** The unique identifier of the image to retrieve. */
+      imageId: ImageId;
+    };
+  }
+
+  export namespace goToPage {
+    export type Params = {
+      /** The url of the page to go to. */
+      page: string;
+    };
+  }
+
+  export namespace listImages {
+    export type Params = {
+      /** The number of items to return per page. */
+      take?: number;
+      /** The cursor indicating where to start fetching the next set of results. It corresponds to the ID of the first item on the current page.
+       * If not provided, the first page of results will be returned.
+       * */
+      from?: string;
     };
   }
 }

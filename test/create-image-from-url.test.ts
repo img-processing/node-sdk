@@ -2,8 +2,7 @@ import { describe, expect, test } from "vitest";
 import { IMGProcessingClient } from "../src/api-client.js";
 
 describe("createImageFromUrl", () => {
-  const apiKey = process.env
-    .IMG_PROCESSING_API_KEY;
+  const apiKey = process.env.IMG_PROCESSING_API_KEY;
   if (!apiKey) {
     throw new Error(
       "IMG_PROCESSING_API_KEY environment variable is required to run the tests",
@@ -17,10 +16,10 @@ describe("createImageFromUrl", () => {
     expect(image.id).toMatch(/^image_[a-zA-Z0-9]{24}$/);
     expect(image.name).toBe("test_image");
     client.resize({
-      imageId: 'image_id',
+      imageId: "image_id",
       width: 100,
-      height: 100
-    })
+      height: 100,
+    });
   });
 
   test("should throw error if no name is provided", async () => {
