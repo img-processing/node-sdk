@@ -134,6 +134,29 @@ export class IMGProcessingClient {
   }
 
   /**
+   * Publish an image, making it publicly accessible.
+   * Published images can be accessed by anyone with the URL.
+   */
+  async publish({
+    imageId,
+  }: IMGProcessingClient.publish.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post(`v1/images/${imageId}/publish`),
+    );
+  }
+
+  /**
+   * Unpublish an image, making it private and inaccessible to the public.
+   */
+  async unpublish({
+    imageId,
+  }: IMGProcessingClient.unpublish.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post(`v1/images/${imageId}/unpublish`),
+    );
+  }
+
+  /**
    * -----------------------------------------
    * Analysis
    * -----------------------------------------
@@ -709,6 +732,20 @@ export declare namespace IMGProcessingClient {
        * If not provided, the first page of results will be returned.
        * */
       from?: string;
+    };
+  }
+
+  export namespace publish {
+    export type Params = {
+      /** The ID of the image to publish. */
+      imageId: ImageId;
+    };
+  }
+
+  export namespace unpublish {
+    export type Params = {
+      /** The ID of the image to unpublish. */
+      imageId: ImageId;
     };
   }
 }

@@ -13,12 +13,18 @@ export class ImageObject<
 {
   public readonly id: `image_${string}`;
   public readonly name: string;
-  public readonly url: string | null;
   public readonly width: number;
   public readonly height: number;
   public readonly format: Format;
   public readonly size: number;
   public readonly created_at: string;
+
+  public get url(): string | null {
+    return this.mutableUrl;
+  }
+
+  protected mutableUrl: string | null;
+
 
   /** The client used to interact with the IMG Processing API. */
   protected readonly client: IMGProcessingClient;
@@ -26,7 +32,7 @@ export class ImageObject<
   constructor({ image, client }: ImageObject.ConstructorProps<Format>) {
     this.id = image.id;
     this.name = image.name;
-    this.url = image.url;
+    this.mutableUrl = image.url;
     this.width = image.width;
     this.height = image.height;
     this.format = image.format;
@@ -47,6 +53,26 @@ export class ImageObject<
    */
   async download(): Promise<Blob> {
     return await this.client.download({ imageId: this.id });
+  }
+
+  /**
+   * Publish an image to make it publicly accessible.
+   * Once an image is published, it will be accessible via a public URL.
+   */
+  async publish(): Promise<ImageObject> {
+    const result = await this.client.publish({ imageId: this.id });
+    this.mutableUrl = result.url;
+    return this;
+  }
+
+  /**
+   * Unpublish an image to make it private.
+   * Once an image is unpublished, it will no longer be accessible via a public URL.
+   */
+  async unpublish(): Promise<ImageObject> {
+    const result = await this.client.unpublish({ imageId: this.id });
+    this.mutableUrl = result.url;
+    return this;
   }
 
   /**
