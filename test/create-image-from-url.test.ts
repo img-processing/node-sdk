@@ -27,6 +27,16 @@ describe("createImageFromUrl", () => {
     const url = "https://storage.img-processing.com/og-image.jpg";
     await expect(() =>
       client.createImageFromUrl({ url, name: undefined as never }),
-    ).rejects.toThrow();
+    ).rejects.toThrow()
+    try {
+      await client.resize({
+        imageId: "image_id",
+        width: 100,
+        height: 100,
+      })
+    } catch (e) {
+      console.log(e)
+    }
+
   });
 });
