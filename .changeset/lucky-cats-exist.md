@@ -1,5 +1,5 @@
 ---
-"img-processing": minor
+"img-processing-sdk": minor
 ---
 
 Initial package
