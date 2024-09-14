@@ -52,7 +52,7 @@ export class ImageObject<
    * The image is returned as a binary response.
    */
   async download(): Promise<Blob> {
-    return await this.client.download({ imageId: this.id });
+    return await this.client.download({ image_id: this.id });
   }
 
   /**
@@ -60,7 +60,7 @@ export class ImageObject<
    * Once an image is published, it will be accessible via a public URL.
    */
   async publish(): Promise<ImageObject> {
-    const result = await this.client.publish({ imageId: this.id });
+    const result = await this.client.publish({ image_id: this.id });
     this.mutableUrl = result.url;
     return this;
   }
@@ -70,7 +70,7 @@ export class ImageObject<
    * Once an image is unpublished, it will no longer be accessible via a public URL.
    */
   async unpublish(): Promise<ImageObject> {
-    const result = await this.client.unpublish({ imageId: this.id });
+    const result = await this.client.unpublish({ image_id: this.id });
     this.mutableUrl = result.url;
     return this;
   }
@@ -87,7 +87,7 @@ export class ImageObject<
    * a deep learning model that excels at image classification tasks.
    */
   async classify(): Promise<ImageObject.classify.Response> {
-    return await this.client.classify({ imageId: this.id });
+    return await this.client.classify({ image_id: this.id });
   }
 
   /**
@@ -113,7 +113,7 @@ export class ImageObject<
     name,
   }: ImageObject.modulate.Params): Promise<ImageObject> {
     return await this.client.modulate({
-      imageId: this.id,
+      image_id: this.id,
       brightness,
       saturation,
       hue,
@@ -133,7 +133,7 @@ export class ImageObject<
     name,
   }: ImageObject.removeBackground.Params): Promise<ImageObject<"png">> {
     return await this.client.removeBackground({
-      imageId: this.id,
+      image_id: this.id,
       name,
     });
   }
@@ -157,7 +157,7 @@ export class ImageObject<
     name,
   }: ImageObject.watermark.Params): Promise<ImageObject> {
     return await this.client.watermark({
-      imageId: this.id,
+      image_id: this.id,
       watermarks,
       name,
     });
@@ -187,7 +187,7 @@ export class ImageObject<
     name,
   }: ImageObject.convert.Params<Format>): Promise<ImageObject<Format>> {
     return await this.client.convert({
-      imageId: this.id,
+      image_id: this.id,
       format,
       quality,
       name,
@@ -207,7 +207,7 @@ export class ImageObject<
     name,
   }: ImageObject.crop.Params): Promise<ImageObject> {
     return await this.client.crop({
-      imageId: this.id,
+      image_id: this.id,
       x1,
       y1,
       x2,
@@ -229,7 +229,7 @@ export class ImageObject<
     name,
   }: IMGProcessingClient.mirror.Params): Promise<ImageObject> {
     return await this.client.mirror({
-      imageId: this.id,
+      image_id: this.id,
       mode,
       name,
     });
@@ -251,7 +251,7 @@ export class ImageObject<
    */
   async resize(options: ImageObject.resize.Params): Promise<ImageObject> {
     return await this.client.resize({
-      imageId: this.id,
+      image_id: this.id,
       ...options,
     });
   }
@@ -266,7 +266,7 @@ export class ImageObject<
     background_color,
   }: ImageObject.rotate.Params): Promise<ImageObject> {
     return await this.client.rotate({
-      imageId: this.id,
+      image_id: this.id,
       angle,
       unit,
       name,
@@ -278,7 +278,7 @@ export class ImageObject<
 export declare namespace ImageObject {
   /** IMG Processing API image supported formats. */
   export type SupportedFormat = "jpeg" | "png" | "webp";
-  /** Id of an Image object */
+  /** ID of an Image object */
   export type ImageId = `image_${string}`;
   /**
    * The Image object represents an image processed using the IMG Processing API. The object contains

@@ -16,7 +16,7 @@ describe("createImageFromUrl", () => {
     expect(image.id).toMatch(/^image_[a-zA-Z0-9]{24}$/);
     expect(image.name).toBe("test_image");
     client.resize({
-      imageId: "image_id",
+      image_id: "image_id",
       width: 100,
       height: 100,
     });
@@ -30,7 +30,7 @@ describe("createImageFromUrl", () => {
     ).rejects.toThrow()
     try {
       await client.resize({
-        imageId: "image_id",
+        image_id: "image_id",
         width: 100,
         height: 100,
       })

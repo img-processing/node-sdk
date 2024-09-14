@@ -59,10 +59,10 @@ export class IMGProcessingClient {
    * The image is returned as a binary response.
    */
   async download({
-    imageId,
+    image_id,
   }: IMGProcessingClient.download.Params): Promise<Blob> {
     try {
-      const response = await this.client.get(`v1/images/${imageId}/download`);
+      const response = await this.client.get(`v1/images/${image_id}/download`);
       return await response.blob();
     } catch (error) {
       if (error instanceof HTTPError) {
@@ -101,9 +101,9 @@ export class IMGProcessingClient {
    * Retrieves an image object by its unique identifier.
    */
   async getImage({
-    imageId,
+    image_id,
   }: IMGProcessingClient.getImage.Params): Promise<ImageObject> {
-    return this.imageRequest(() => this.client.get(`v1/images/${imageId}`));
+    return this.imageRequest(() => this.client.get(`v1/images/${image_id}`));
   }
 
   /**
@@ -138,10 +138,10 @@ export class IMGProcessingClient {
    * Published images can be accessed by anyone with the URL.
    */
   async publish({
-    imageId,
+    image_id,
   }: IMGProcessingClient.publish.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post(`v1/images/${imageId}/publish`),
+      this.client.post(`v1/images/${image_id}/publish`),
     );
   }
 
@@ -149,10 +149,10 @@ export class IMGProcessingClient {
    * Unpublish an image, making it private and inaccessible to the public.
    */
   async unpublish({
-    imageId,
+    image_id,
   }: IMGProcessingClient.unpublish.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post(`v1/images/${imageId}/unpublish`),
+      this.client.post(`v1/images/${image_id}/unpublish`),
     );
   }
 
@@ -168,10 +168,10 @@ export class IMGProcessingClient {
    * a deep learning model that excels at image classification tasks.
    */
   async classify({
-    imageId,
+    image_id,
   }: IMGProcessingClient.classify.Params): Promise<IMGProcessingClient.classify.Response> {
     return this.request(() =>
-      this.client.post(`v1/images/${imageId}/classify`, {
+      this.client.post(`v1/images/${image_id}/classify`, {
         json: {},
       }),
     );
@@ -286,7 +286,7 @@ export class IMGProcessingClient {
    * Finally, hue refers to the color of the image. It is represented as a circular color space, with red, green, and blue forming the primary colors.
    */
   async modulate({
-    imageId,
+    image_id,
     brightness,
     saturation,
     hue,
@@ -294,7 +294,7 @@ export class IMGProcessingClient {
     name,
   }: IMGProcessingClient.modulate.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post<ImageObject>(`v1/images/${imageId}/modulate`, {
+      this.client.post<ImageObject>(`v1/images/${image_id}/modulate`, {
         json: {
           brightness,
           saturation,
@@ -314,12 +314,12 @@ export class IMGProcessingClient {
    * The API uses advanced machine learning algorithms to detect and remove the background from the image, leaving only the foreground subject.
    */
   async removeBackground({
-    imageId,
+    image_id,
     name,
   }: IMGProcessingClient.removeBackground.Params): Promise<ImageObject<"png">> {
     return this.imageRequest(() =>
       this.client.post<ImageObject<"png">>(
-        `v1/images/${imageId}/remove-background`,
+        `v1/images/${image_id}/remove-background`,
         {
           json: {
             name,
@@ -344,12 +344,12 @@ export class IMGProcessingClient {
    * apply the transformations, and once you have the desired watermark, apply it to your images using this endpo
    */
   async watermark({
-    imageId,
+    image_id,
     watermarks,
     name,
   }: IMGProcessingClient.watermark.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post<ImageObject>(`v1/images/${imageId}/watermark`, {
+      this.client.post<ImageObject>(`v1/images/${image_id}/watermark`, {
         json: {
           watermarks,
           name,
@@ -377,12 +377,12 @@ export class IMGProcessingClient {
    * WebP images are smaller compared to JPEG and PNG, while maintaining similar or better image quality.
    */
   async convert<Format extends ImageObject.SupportedFormat>({
-    imageId,
+    image_id,
     format,
     name,
   }: IMGProcessingClient.convert.Params<Format>): Promise<ImageObject<Format>> {
     return this.imageRequest(() =>
-      this.client.post<ImageObject<Format>>(`v1/images/${imageId}/convert`, {
+      this.client.post<ImageObject<Format>>(`v1/images/${image_id}/convert`, {
         json: {
           format,
           name,
@@ -397,7 +397,7 @@ export class IMGProcessingClient {
    * The crop area is defined by 2 points: the top-left corner at `(x1, y1)` and the bottom-right corner at `(x2, y2)`.
    */
   async crop({
-    imageId,
+    image_id,
     x1,
     y1,
     x2,
@@ -405,7 +405,7 @@ export class IMGProcessingClient {
     name,
   }: IMGProcessingClient.crop.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post<ImageObject>(`v1/images/${imageId}/crop`, {
+      this.client.post<ImageObject>(`v1/images/${image_id}/crop`, {
         json: {
           x1,
           y1,
@@ -425,12 +425,12 @@ export class IMGProcessingClient {
    * horizontally and vertically at the same time using the mode `both`.
    */
   async mirror({
-    imageId,
+    image_id,
     mode,
     name,
   }: IMGProcessingClient.mirror.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post<ImageObject>(`v1/images/${imageId}/mirror`, {
+      this.client.post<ImageObject>(`v1/images/${image_id}/mirror`, {
         json: {
           mode,
           name,
@@ -454,7 +454,7 @@ export class IMGProcessingClient {
    * the gravity for cropping or positioning the image when using the `cover` and `contain` fit modes.
    */
   async resize({
-    imageId,
+    image_id,
     width,
     height,
     fit,
@@ -462,7 +462,7 @@ export class IMGProcessingClient {
     position,
   }: IMGProcessingClient.resize.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post<ImageObject>(`v1/images/${imageId}/resize`, {
+      this.client.post<ImageObject>(`v1/images/${image_id}/resize`, {
         json: {
           width,
           height,
@@ -478,13 +478,13 @@ export class IMGProcessingClient {
    * Rotate an existing image by a specified angle.
    */
   async rotate({
-    imageId,
+    image_id,
     angle,
     unit,
     name,
   }: IMGProcessingClient.rotate.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
-      this.client.post<ImageObject>(`v1/images/${imageId}/rotate`, {
+      this.client.post<ImageObject>(`v1/images/${image_id}/rotate`, {
         json: {
           angle,
           unit,
@@ -544,7 +544,7 @@ export declare namespace IMGProcessingClient {
   export namespace resize {
     export type Params = {
       /** The ID of the image to resize. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** The desired width of the resized image in pixels. */
       width: number;
       /** The desired height of the resized image in pixels. */
@@ -579,7 +579,7 @@ export declare namespace IMGProcessingClient {
   export namespace crop {
     export type Params = {
       /** The ID of the image to crop. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** The x-coordinate of the top-left corner of the crop area. */
       x1: number;
       /** The y-coordinate of the top-left corner of the crop area. */
@@ -603,7 +603,7 @@ export declare namespace IMGProcessingClient {
     export type Mode = "horizontal" | "vertical" | "both";
     export type Params = {
       /** The ID of the image to mirror. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** /*** The mirror mode to apply to the image. */
       mode: Mode;
       /** The name of the image. If not provided, the original image name will be used. */
@@ -614,7 +614,7 @@ export declare namespace IMGProcessingClient {
   export namespace convert {
     export type Params<Format extends ImageObject.SupportedFormat> = {
       /** The ID of the image to convert. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** The format to convert the image to. */
       format: Format;
       /** The quality of the converted image if the target format is `jpeg`. */
@@ -627,7 +627,7 @@ export declare namespace IMGProcessingClient {
   export namespace rotate {
     export type Params = {
       /** The ID of the image to rotate. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** The angle in degrees or radians rotate the image. */
       angle: number;
       /** The unit of the angle. Default is `degrees`. */
@@ -642,7 +642,7 @@ export declare namespace IMGProcessingClient {
   export namespace watermark {
     export type Params = {
       /** The ID of the image to add watermarks. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** An array of watermark objects to apply to the image. */
       watermarks: {
         /** The unique identifier of the image to use as a watermark. */
@@ -660,7 +660,7 @@ export declare namespace IMGProcessingClient {
   export namespace modulate {
     export type Params = {
       /** The ID of the image to adjust the brightness, saturation, and hue. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** The brightness multiplier to apply to the image. The difference between the `brightness` and `lightness` parameters is that `brightness` multiplies the color values, while `lightness` adds a constant value to the color values. */
       brightness?: number;
       /** The saturation multiplier to apply to the image. */
@@ -677,7 +677,7 @@ export declare namespace IMGProcessingClient {
   export namespace removeBackground {
     export type Params = {
       /** The ID of the image to remove the background. */
-      imageId: ImageId;
+      image_id: ImageId;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
     };
@@ -686,7 +686,7 @@ export declare namespace IMGProcessingClient {
   export namespace classify {
     export type Params = {
       /** The ID of the image to classify. */
-      imageId: ImageId;
+      image_id: ImageId;
     };
     export type Response = {
       /** The main label of the image. This is the label with the highest probability. */
@@ -706,14 +706,14 @@ export declare namespace IMGProcessingClient {
   export namespace download {
     export type Params = {
       /** The unique identifier of the image to download. */
-      imageId: ImageId;
+      image_id: ImageId;
     };
   }
 
   export namespace getImage {
     export type Params = {
       /** The unique identifier of the image to retrieve. */
-      imageId: ImageId;
+      image_id: ImageId;
     };
   }
 
@@ -738,14 +738,14 @@ export declare namespace IMGProcessingClient {
   export namespace publish {
     export type Params = {
       /** The ID of the image to publish. */
-      imageId: ImageId;
+      image_id: ImageId;
     };
   }
 
   export namespace unpublish {
     export type Params = {
       /** The ID of the image to unpublish. */
-      imageId: ImageId;
+      image_id: ImageId;
     };
   }
 }
