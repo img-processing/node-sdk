@@ -1,5 +1,5 @@
 {
-  "name": "img-processing",
+  "name": "img-processing-sdk",
   "version": "0.0.1",
   "description": "SDK for image processing",
   "keywords": ["img processing", "image processing", "api", "sdk"],
