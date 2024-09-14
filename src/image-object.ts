@@ -131,7 +131,7 @@ export class ImageObject<
    */
   async removeBackground({
     name,
-  }: ImageObject.removeBackground.Params): Promise<ImageObject<"png">> {
+  }: ImageObject.removeBackground.Params = {}): Promise<ImageObject<"png">> {
     return await this.client.removeBackground({
       image_id: this.id,
       name,
