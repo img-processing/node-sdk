@@ -379,12 +379,14 @@ export class IMGProcessingClient {
   async convert<Format extends ImageObject.SupportedFormat>({
     image_id,
     format,
+    quality,
     name,
   }: IMGProcessingClient.convert.Params<Format>): Promise<ImageObject<Format>> {
     return this.imageRequest(() =>
       this.client.post<ImageObject<Format>>(`v1/images/${image_id}/convert`, {
         json: {
           format,
+          quality,
           name,
         },
       }),
@@ -694,7 +696,7 @@ export declare namespace IMGProcessingClient {
       /** The score of the main label. The score is a number between 0 and 1, where 1 is the highest probability. */
       main_score: number;
       /** A list of labels and their probabilities for the image. */
-      labels: {
+      secondary_labels: {
         /** The label of the image. */
         label: string;
         /** The probability of the label. The probability is a number between 0 and 1, where 1 is the highest probability. */
