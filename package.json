@@ -1,12 +1,16 @@
 {
   "name": "img-processing",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "SDK for image processing",
   "keywords": ["img processing", "image processing", "api", "sdk"],
   "homepage": "https://img-processing.com",
   "license": "MIT",
+  "main": "dist/index.js",
   "scripts": {
-    "check": "bunx biome check --write"
+    "build": "tsc",
+    "check": "bunx biome check --write",
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "local-release": "changeset version && changeset publish"
   },
   "bugs": {
     "url": "https://github.com/img-processing/node-sdk/issues"
@@ -24,6 +28,8 @@
     "vitest": "2.0.5"
   },
   "dependencies": {
+    "@arethetypeswrong/cli": "^0.16.2",
+    "@changesets/cli": "^2.27.8",
     "file-type": "^19.5.0",
     "ky": "1.7.2"
   }
