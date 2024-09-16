@@ -1,5 +1,16 @@
 # img-processing-sdk
 
+## 0.3.0
+
+### Minor Changes
+
+- db5aec6: Changed package name
+- db5aec6: Initial package
+
+### Patch Changes
+
+- db5aec6: Optional remove background param
+
 ## 0.2.0
 
 ### Minor Changes

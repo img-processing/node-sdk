@@ -1,6 +1,6 @@
 {
   "name": "img-processing-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "SDK for image processing",
   "keywords": [
     "img processing",
@@ -15,7 +15,6 @@
     "build": "tsc",
     "check": "bunx biome check --write",
     "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
-    "local-release": "changeset version && changeset publish",
     "test": "dotenvx run -- vitest"
   },
   "bugs": {
