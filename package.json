@@ -16,7 +16,7 @@
     "check": "bunx biome check --write",
     "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
     "local-release": "changeset version && changeset publish",
-    "test": "dotenvx run -- vitest test"
+    "test": "dotenvx run -- vitest"
   },
   "bugs": {
     "url": "https://github.com/img-processing/node-sdk/issues"
