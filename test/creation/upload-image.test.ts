@@ -1,9 +1,8 @@
 import { Blob, File } from "node:buffer";
 import fs from "node:fs";
-import * as path from "node:path";
 import { describe, expect, test } from "vitest";
-import { IMGProcessingClient } from "../src/api-client.js";
-import { IMGProcessingAPIError } from "../src/api-error.js";
+import { IMGProcessingClient, IMGProcessingAPIError } from '../../src/index.js';
+import { getAsset } from '../helpers.js';
 
 describe("uploadImage", () => {
   const apiKey = process.env.IMG_PROCESSING_API_KEY;
@@ -14,7 +13,7 @@ describe("uploadImage", () => {
   }
   test("should upload an image in the filesystem", async () => {
     const client = new IMGProcessingClient({ apiKey });
-    const imagePath = path.join(__dirname, "assets", "test_image_1.jpeg");
+    const imagePath = getAsset("test_image_1.jpeg");
     const image = await client.uploadImage({
       image: imagePath,
       name: "test_image",
@@ -25,7 +24,7 @@ describe("uploadImage", () => {
 
   test("should upload an image as a buffer", async () => {
     const client = new IMGProcessingClient({ apiKey });
-    const imagePath = path.join(__dirname, "assets", "test_image_1.jpeg");
+    const imagePath = getAsset("test_image_1.jpeg");
     const buffer = await fs.promises.readFile(imagePath);
     const image = await client.uploadImage({
       image: buffer,
@@ -37,7 +36,7 @@ describe("uploadImage", () => {
 
   test("should upload an image as a blob", async () => {
     const client = new IMGProcessingClient({ apiKey });
-    const imagePath = path.join(__dirname, "assets", "test_image_1.jpeg");
+    const imagePath = getAsset("test_image_1.jpeg");
     const buffer = await fs.promises.readFile(imagePath);
     const blob = new Blob([buffer], { type: "image/jpeg" });
     const image = await client.uploadImage({ image: blob, name: "test_image" });
@@ -47,7 +46,7 @@ describe("uploadImage", () => {
 
   test("should upload an image as a file", async () => {
     const client = new IMGProcessingClient({ apiKey });
-    const imagePath = path.join(__dirname, "assets", "test_image_1.jpeg");
+    const imagePath = getAsset("test_image_1.jpeg");
     const buffer = await fs.promises.readFile(imagePath);
     const file = new File([buffer], "test_image_1.jpeg", {
       type: "image/jpeg",
@@ -59,8 +58,8 @@ describe("uploadImage", () => {
 
   test("should throw an error if the image is not a valid type", async () => {
     const client = new IMGProcessingClient({ apiKey });
-    const imagePath = path.join(__dirname, "assets", "invalid.svg");
-    expect(async () =>
+    const imagePath = getAsset("invalid.svg");
+    await expect(() =>
       client.uploadImage({ image: imagePath, name: "test_image" }),
     ).rejects.toThrow(IMGProcessingAPIError);
   });
