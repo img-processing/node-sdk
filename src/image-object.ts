@@ -227,7 +227,7 @@ export class ImageObject<
   async mirror({
     mode,
     name,
-  }: IMGProcessingClient.mirror.Params): Promise<ImageObject> {
+  }: ImageObject.mirror.Params): Promise<ImageObject> {
     return await this.client.mirror({
       image_id: this.id,
       mode,
