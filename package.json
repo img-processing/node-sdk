@@ -8,9 +8,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "check": "bunx biome check --write",
+    "check": "biome check --write",
     "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
-    "test": "dotenvx run -- vitest"
+    "test": "dotenvx run -- vitest",
+    "prepublish": "bun run build"
   },
   "bugs": {
     "url": "https://github.com/img-processing/node-sdk/issues"
