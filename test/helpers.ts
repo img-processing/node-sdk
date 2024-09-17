@@ -1,4 +1,4 @@
-import * as path from 'node:path';
+import * as path from "node:path";
 
 /**
  * Get the path of an asset in the `assets` directory

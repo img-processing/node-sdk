@@ -1,11 +1,11 @@
 import { describe, expect, test } from "vitest";
-import { IMGProcessingClient } from '../../src/index.js';
-import { getApiKey } from '../helpers.js';
-
-
+import { IMGProcessingClient } from "../../src/index.js";
+import { getApiKey } from "../helpers.js";
 
 describe("createImageFromUrl", () => {
-  const client: IMGProcessingClient = new IMGProcessingClient({ apiKey: getApiKey() });
+  const client: IMGProcessingClient = new IMGProcessingClient({
+    apiKey: getApiKey(),
+  });
 
   test("should create an image from a URL", async () => {
     const url = "https://storage.img-processing.com/og-image.jpg";
@@ -24,6 +24,6 @@ describe("createImageFromUrl", () => {
     const url = "https://storage.img-processing.com/og-image.jpg";
     await expect(() =>
       client.createImageFromUrl({ url, name: undefined as never }),
-    ).rejects.toThrow()
+    ).rejects.toThrow();
   });
 });

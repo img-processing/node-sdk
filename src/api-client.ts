@@ -258,7 +258,7 @@ export class IMGProcessingClient {
     prompt,
     negative_prompt,
     name,
-    seed
+    seed,
   }: IMGProcessingClient.imagine.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
       this.client.post<ImageObject>("v1/images/imagine", {

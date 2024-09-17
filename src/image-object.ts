@@ -25,7 +25,6 @@ export class ImageObject<
 
   protected mutableUrl: string | null;
 
-
   /** The client used to interact with the IMG Processing API. */
   protected readonly client: IMGProcessingClient;
 

@@ -1,17 +1,22 @@
-import { beforeAll, describe, expect, test } from 'vitest';
-import { ImageObject, IMGProcessingClient } from '../../src/index.js';
-import { getApiKey } from '../helpers.js';
+import { beforeAll, describe, expect, test } from "vitest";
+import { IMGProcessingClient, type ImageObject } from "../../src/index.js";
+import { getApiKey } from "../helpers.js";
 
-describe('rotate', () => {
-  const client: IMGProcessingClient = new IMGProcessingClient({ apiKey: getApiKey() });
+describe("rotate", () => {
+  const client: IMGProcessingClient = new IMGProcessingClient({
+    apiKey: getApiKey(),
+  });
   let uploadedImage: ImageObject;
 
   beforeAll(async () => {
     const url = "https://storage.img-processing.com/og-image.jpg";
-    uploadedImage = await client.createImageFromUrl({ url, name: "test_image" });
-  })
+    uploadedImage = await client.createImageFromUrl({
+      url,
+      name: "test_image",
+    });
+  });
 
-  test('should rotate an image', async () => {
+  test("should rotate an image", async () => {
     const rotatedImage = await uploadedImage.rotate({
       angle: 90,
     });
@@ -20,5 +25,5 @@ describe('rotate', () => {
     expect(rotatedImage.name).toBe("test_image");
     expect(rotatedImage.width).toBe(uploadedImage.height);
     expect(rotatedImage.height).toBe(uploadedImage.width);
-  })
-})
+  });
+});
