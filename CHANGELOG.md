@@ -1,5 +1,11 @@
 # img-processing-sdk
 
+## 0.4.0
+
+### Minor Changes
+
+- 9272f36: Tested library methods
+
 ## 0.3.0
 
 ### Minor Changes
