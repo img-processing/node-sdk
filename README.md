@@ -104,4 +104,4 @@ Test images are not counted in the billing.
 
 ## Contributing
 
-If you want to contribute to the SDK, please check the [Contributing](contributing) guide.
+If you want to contribute to the SDK, please check the [Contributing](contributing.md) guide.
