@@ -1,5 +1,11 @@
 # img-processing-sdk
 
+## 0.5.0
+
+### Minor Changes
+
+- 62e496e: Early preview
+
 ## 0.4.0
 
 ### Minor Changes
