@@ -1,5 +1,11 @@
 # img-processing-sdk
 
+## 1.0.0
+
+### Major Changes
+
+- fedd857: First release
+
 ## 0.5.0
 
 ### Minor Changes
