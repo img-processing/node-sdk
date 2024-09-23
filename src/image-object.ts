@@ -47,6 +47,13 @@ export class ImageObject<
    */
 
   /**
+   * Deletes the image from the IMG Processing API.
+   */
+  async delete(): Promise<void> {
+    await this.client.deleteImage({ image_id: this.id });
+  }
+
+  /**
    * Download an image by its unique identifier.
    * The image is returned as a binary response.
    */

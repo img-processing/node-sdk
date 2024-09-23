@@ -55,6 +55,25 @@ export class IMGProcessingClient {
    */
 
   /**
+   * Deletes an image by its unique identifier.
+   */
+  async deleteImage({
+    image_id,
+  }: IMGProcessingClient.deleteImage.Params): Promise<void> {
+    try {
+      await this.client.delete(`v1/images/${image_id}`);
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        throw new IMGProcessingAPIError(await error.response.json());
+      }
+      console.error(error);
+      throw new Error(
+        "An unexpected error occurred. Create an issue: https://github.com/img-processing/node-sdk/issues",
+      );
+    }
+  }
+
+  /**
    * Download an image by its unique identifier.
    * The image is returned as a binary response.
    */
@@ -751,6 +770,13 @@ export declare namespace IMGProcessingClient {
   export namespace unpublish {
     export type Params = {
       /** The ID of the image to unpublish. */
+      image_id: ImageId;
+    };
+  }
+
+  export namespace deleteImage {
+    export type Params = {
+      /** The ID of the image to delete. */
       image_id: ImageId;
     };
   }
