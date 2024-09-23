@@ -1,8 +1,13 @@
 {
   "name": "img-processing-sdk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "SDK for image processing",
-  "keywords": ["img processing", "image processing", "api", "sdk"],
+  "keywords": [
+    "img processing",
+    "image processing",
+    "api",
+    "sdk"
+  ],
   "homepage": "https://img-processing.com",
   "license": "MIT",
   "main": "dist/index.js",
@@ -21,7 +26,9 @@
     "type": "git",
     "url": "git+https://github.com/img-processing/node-sdk.git"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.8.3",

@@ -1,5 +1,11 @@
 # img-processing-sdk
 
+## 1.1.0
+
+### Minor Changes
+
+- 3f7ecbd: Add delete method
+
 ## 1.0.0
 
 ### Major Changes
