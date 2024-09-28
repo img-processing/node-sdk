@@ -197,6 +197,26 @@ export class IMGProcessingClient {
   }
 
   /**
+   * Visualize an image using a pre-trained model and generate an answer based on the prompt.
+   * The prompt can be a question, statement, or any text that you want to ask about the image. The API will analyze the content of the image and generate a response based on the prompt
+   * using a pre-trained model.
+   */
+  async visualize({
+    image_id,
+    prompt,
+    model,
+  }: IMGProcessingClient.visualize.Params): Promise<IMGProcessingClient.visualize.Response> {
+    return this.request(() =>
+      this.client.post(`v1/images/${image_id}/visualize`, {
+        json: {
+          prompt,
+          model,
+        },
+      }),
+    );
+  }
+
+  /**
    * -----------------------------------------
    * Creation
    * -----------------------------------------
@@ -296,6 +316,30 @@ export class IMGProcessingClient {
    * Edition
    * -----------------------------------------
    */
+
+  /**
+   * Apply a blur effect to an image. Blurring an image can be useful for various purposes,
+   * such as anonymizing sensitive information, creating a soft-focus effect, loader skeletons, etc.
+   *
+   * Blurring an image depends on a factor `sigma` that determines the intensity of the blur effect.
+   * The higher the value of `sigma`, the more intense the blur effect will be.
+   * This value represents the standard deviation of the Gaussian kernel used to apply the blur effect.
+   */
+  async blur({
+    image_id,
+    sigma,
+    name,
+  }: IMGProcessingClient.blur.Params): Promise<ImageObject> {
+    return this.imageRequest(() =>
+      this.client.post<ImageObject>(`v1/images/${image_id}/blur`, {
+        json: {
+          sigma,
+          name,
+        },
+      }),
+    );
+  }
+
 
   /**
    * Adjust the brightness, saturation, and hue of an image.
@@ -778,6 +822,32 @@ export declare namespace IMGProcessingClient {
     export type Params = {
       /** The ID of the image to delete. */
       image_id: ImageId;
+    };
+  }
+
+  export namespace visualize {
+    export type Params = {
+      /** The ID of the image to visualize. */
+      image_id: ImageId;
+      /** The prompt to generate the answer. */
+      prompt: string;
+      /** The model to use for the visualization. */
+      model?: "uform-gen" | "llava"
+    };
+    export type Response = {
+      /** The generated answer based on the prompt. */
+      response: string;
+    };
+  }
+
+  export namespace blur {
+    export type Params = {
+      /** The ID of the image to blur. */
+      image_id: ImageId;
+      /** The standard deviation of the Gaussian kernel used to apply the blur effect. Default is 20. */
+      sigma?: number;
+      /** The name of the image. If not provided, the original image name will be used. */
+      name?: string;
     };
   }
 }

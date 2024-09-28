@@ -97,10 +97,46 @@ export class ImageObject<
   }
 
   /**
+   * Visualize an image using a pre-trained model and generate an answer based on the prompt.
+   * The prompt can be a question, statement, or any text that you want to ask about the image. The API will analyze the content of the image and generate a response based on the prompt
+   * using a pre-trained model.
+   */
+  async visualize({
+    prompt,
+    model,
+  }: ImageObject.visualize.Params): Promise<ImageObject.visualize.Response> {
+    return await this.client.visualize({
+      image_id: this.id,
+      prompt,
+      model,
+    });
+  }
+
+
+  /**
    * -----------------------------------------
    * Edition
    * -----------------------------------------
    */
+
+  /**
+   * Apply a blur effect to an image. Blurring an image can be useful for various purposes,
+   * such as anonymizing sensitive information, creating a soft-focus effect, loader skeletons, etc.
+   *
+   * Blurring an image depends on a factor `sigma` that determines the intensity of the blur effect.
+   * The higher the value of `sigma`, the more intense the blur effect will be.
+   * This value represents the standard deviation of the Gaussian kernel used to apply the blur effect.
+   */
+  async blur({
+    sigma,
+    name
+  } : ImageObject.blur.Params = {}): Promise<ImageObject> {
+    return await this.client.blur({
+      image_id: this.id,
+      sigma,
+      name,
+    });
+  }
 
   /**
    * Adjust the brightness, saturation, and hue of an image.
@@ -351,5 +387,12 @@ export declare namespace ImageObject {
   }
   export namespace classify {
     export type Response = IMGProcessingClient.classify.Response;
+  }
+  export namespace visualize {
+    export type Params = WithoutImageId<IMGProcessingClient.visualize.Params>;
+    export type Response = IMGProcessingClient.visualize.Response;
+  }
+  export namespace blur {
+    export type Params = WithoutImageId<IMGProcessingClient.blur.Params>;
   }
 }
