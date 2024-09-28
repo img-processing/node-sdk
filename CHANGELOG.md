@@ -1,5 +1,11 @@
 # img-processing-sdk
 
+## 1.2.0
+
+### Minor Changes
+
+- f61d583: Added blur and visualize methods
+
 ## 1.1.0
 
 ### Minor Changes
