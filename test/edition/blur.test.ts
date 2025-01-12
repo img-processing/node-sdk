@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, test } from "vitest";
 import { IMGProcessingClient, type ImageObject } from "../../src/index.js";
-import { getApiKey } from "../helpers.js";
+import { getApiKey } from "../test-helpers.js";
 
 describe("blur", () => {
   const client: IMGProcessingClient = new IMGProcessingClient({
