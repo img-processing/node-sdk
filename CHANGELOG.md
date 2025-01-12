@@ -1,5 +1,13 @@
 # img-processing-sdk
 
+## 1.3.0
+
+### Minor Changes
+
+- db57b93: - Added `extractText` method to the client.
+  - Added new params for `watermark` and `imagine` methods.
+  - Removed wrong parameter `background_color` from `rotate`.
+
 ## 1.2.0
 
 ### Minor Changes
