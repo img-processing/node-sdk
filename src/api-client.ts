@@ -717,8 +717,6 @@ export declare namespace IMGProcessingClient {
       angle: number;
       /** The unit of the angle. Default is `degrees`. */
       unit?: "degrees" | "radians";
-      /** The background color to fill the empty areas after rotating the image. Default is `#000000`. */
-      background_color?: string;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
     };

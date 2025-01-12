@@ -313,14 +313,12 @@ export class ImageObject<
     angle,
     unit,
     name,
-    background_color,
   }: ImageObject.rotate.Params): Promise<ImageObject> {
     return await this.client.rotate({
       image_id: this.id,
       angle,
       unit,
       name,
-      background_color,
     });
   }
 }
