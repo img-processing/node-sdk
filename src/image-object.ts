@@ -102,7 +102,7 @@ export class ImageObject<
    * **Note:** This method is not available in test mode, since test watermarks prevent accurate text extraction. If you want to test the capabilities of this endpoint, please switch to live mode to use this feature, or contact support to temporarily upgrade your account.
    */
   async extractText(): Promise<ImageObject.extractText.Response> {
-    return await this.client.extractText({image_id: this.id});
+    return await this.client.extractText({ image_id: this.id });
   }
 
   /**
@@ -121,7 +121,6 @@ export class ImageObject<
     });
   }
 
-
   /**
    * -----------------------------------------
    * Edition
@@ -138,8 +137,8 @@ export class ImageObject<
    */
   async blur({
     sigma,
-    name
-  } : ImageObject.blur.Params = {}): Promise<ImageObject> {
+    name,
+  }: ImageObject.blur.Params = {}): Promise<ImageObject> {
     return await this.client.blur({
       image_id: this.id,
       sigma,

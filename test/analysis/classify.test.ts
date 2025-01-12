@@ -4,7 +4,7 @@ import {
   IMGProcessingClient,
   type ImageObject,
 } from "../../src/index.js";
-import { getApiKey } from "../helpers.js";
+import { getApiKey } from "../test-helpers.js";
 
 describe("classify", () => {
   const client: IMGProcessingClient = new IMGProcessingClient({

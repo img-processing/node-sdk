@@ -2,7 +2,7 @@ import { Blob, File } from "node:buffer";
 import fs from "node:fs";
 import { describe, expect, test } from "vitest";
 import { IMGProcessingAPIError, IMGProcessingClient } from "../../src/index.js";
-import { getAsset } from "../helpers.js";
+import { getAsset } from "../test-helpers.js";
 
 describe("uploadImage", () => {
   const apiKey = process.env.IMG_PROCESSING_API_KEY;

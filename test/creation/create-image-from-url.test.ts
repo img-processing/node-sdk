@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { IMGProcessingClient } from "../../src/index.js";
-import { getApiKey } from "../helpers.js";
+import { getApiKey } from "../test-helpers.js";
 
 describe("createImageFromUrl", () => {
   const client: IMGProcessingClient = new IMGProcessingClient({

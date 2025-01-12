@@ -201,9 +201,11 @@ export class IMGProcessingClient {
    *
    * **Note:** This method is not available in test mode, since test watermarks prevent accurate text extraction. If you want to test the capabilities of this endpoint, please switch to live mode to use this feature, or contact support to temporarily upgrade your account.
    */
-  async extractText({ image_id }: IMGProcessingClient.extractText.Params): Promise<IMGProcessingClient.extractText.Response> {
+  async extractText({
+    image_id,
+  }: IMGProcessingClient.extractText.Params): Promise<IMGProcessingClient.extractText.Response> {
     return this.request(() =>
-      this.client.post(`v1/images/${image_id}/extract-text`)
+      this.client.post(`v1/images/${image_id}/extract-text`),
     );
   }
 
@@ -350,7 +352,6 @@ export class IMGProcessingClient {
       }),
     );
   }
-
 
   /**
    * Adjust the brightness, saturation, and hue of an image.
@@ -843,7 +844,7 @@ export declare namespace IMGProcessingClient {
       /** The prompt to generate the answer. */
       prompt: string;
       /** The model to use for the visualization. */
-      model?: "uform-gen" | "llava"
+      model?: "uform-gen" | "llava";
     };
     export type Response = {
       /** The generated answer based on the prompt. */
