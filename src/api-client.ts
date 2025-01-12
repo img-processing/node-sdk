@@ -197,6 +197,17 @@ export class IMGProcessingClient {
   }
 
   /**
+   * Extracts the text from an image and returns its lines as a list of strings.
+   *
+   * **Note:** This method is not available in test mode, since test watermarks prevent accurate text extraction. If you want to test the capabilities of this endpoint, please switch to live mode to use this feature, or contact support to temporarily upgrade your account.
+   */
+  async extractText({ image_id }: IMGProcessingClient.extractText.Params): Promise<IMGProcessingClient.extractText.Response> {
+    return this.request(() =>
+      this.client.post(`v1/images/${image_id}/extract-text`)
+    );
+  }
+
+  /**
    * Visualize an image using a pre-trained model and generate an answer based on the prompt.
    * The prompt can be a question, statement, or any text that you want to ask about the image. The API will analyze the content of the image and generate a response based on the prompt
    * using a pre-trained model.
@@ -848,6 +859,17 @@ export declare namespace IMGProcessingClient {
       sigma?: number;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
+    };
+  }
+
+  export namespace extractText {
+    export type Params = {
+      /** The ID of the image to extract text. */
+      image_id: ImageId;
+    };
+    export type Response = {
+      /** The lines of text extracted from the image. */
+      lines: string[];
     };
   }
 }

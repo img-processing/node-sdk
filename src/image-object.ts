@@ -97,6 +97,15 @@ export class ImageObject<
   }
 
   /**
+   * Extracts the text from the current image and returns its lines as a list of strings.
+   *
+   * **Note:** This method is not available in test mode, since test watermarks prevent accurate text extraction. If you want to test the capabilities of this endpoint, please switch to live mode to use this feature, or contact support to temporarily upgrade your account.
+   */
+  async extractText(): Promise<ImageObject.extractText.Response> {
+    return await this.client.extractText({image_id: this.id});
+  }
+
+  /**
    * Visualize an image using a pre-trained model and generate an answer based on the prompt.
    * The prompt can be a question, statement, or any text that you want to ask about the image. The API will analyze the content of the image and generate a response based on the prompt
    * using a pre-trained model.
@@ -394,5 +403,8 @@ export declare namespace ImageObject {
   }
   export namespace blur {
     export type Params = WithoutImageId<IMGProcessingClient.blur.Params>;
+  }
+  export namespace extractText {
+    export type Response = IMGProcessingClient.extractText.Response;
   }
 }
