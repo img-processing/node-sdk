@@ -311,6 +311,7 @@ export class IMGProcessingClient {
     negative_prompt,
     name,
     seed,
+    model
   }: IMGProcessingClient.imagine.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
       this.client.post<ImageObject>("v1/images/imagine", {
@@ -319,6 +320,7 @@ export class IMGProcessingClient {
           negative_prompt,
           name,
           seed,
+          model
         },
       }),
     );
@@ -619,6 +621,8 @@ export declare namespace IMGProcessingClient {
       name: string;
       /** The seed to use for the generation. */
       seed?: number;
+      /** The model to use for the generation. */
+      model?: "sdxl" | "flux"
     };
   }
 
@@ -713,8 +717,6 @@ export declare namespace IMGProcessingClient {
       angle: number;
       /** The unit of the angle. Default is `degrees`. */
       unit?: "degrees" | "radians";
-      /** The background color to fill the empty areas after rotating the image. Default is `#000000`. */
-      background_color?: string;
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
     };
@@ -729,9 +731,15 @@ export declare namespace IMGProcessingClient {
         /** The unique identifier of the image to use as a watermark. */
         id: ImageId;
         /** The position of the watermark from the left of the image to apply the watermark. */
-        left: number;
+        left?: number;
         /** The position of the watermark from the top of the image to apply the watermark. */
-        top: number;
+        top?: number;
+        /** The width of the watermark to apply to the image. */
+        width?: number;
+        /** The height of the watermark to apply to the image. */
+        height?: number;
+        /** The repetition mode of the watermark. If not provided, the watermark will be applied once. */
+        repetition_mode?: "no_repeat" | "repeat" | "repeat_x" | "repeat_y";
       }[];
       /** The name of the image. If not provided, the original image name will be used. */
       name?: string;
