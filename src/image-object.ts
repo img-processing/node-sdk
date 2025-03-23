@@ -106,6 +106,20 @@ export class ImageObject<
   }
 
   /**
+   * Extracts the text from the current image and returns its content in the `format` specified.
+   *
+   * **Note:** This method is not available in test mode, since test watermarks prevent accurate text extraction. If you want to test the capabilities of this endpoint, please switch to live mode to use this feature, or contact support to temporarily upgrade your account.
+   */
+  async extractFormattedText({
+    format,
+  }: ImageObject.extractFormattedText.Params = {}): Promise<ImageObject.extractFormattedText.Response> {
+    return await this.client.extractFormattedText({
+      image_id: this.id,
+      format,
+    });
+  }
+
+  /**
    * Visualize an image using a pre-trained model and generate an answer based on the prompt.
    * The prompt can be a question, statement, or any text that you want to ask about the image. The API will analyze the content of the image and generate a response based on the prompt
    * using a pre-trained model.
@@ -403,5 +417,10 @@ export declare namespace ImageObject {
   }
   export namespace extractText {
     export type Response = IMGProcessingClient.extractText.Response;
+  }
+  export namespace extractFormattedText {
+    export type Params =
+      WithoutImageId<IMGProcessingClient.extractFormattedText.Params>;
+    export type Response = IMGProcessingClient.extractFormattedText.Response;
   }
 }

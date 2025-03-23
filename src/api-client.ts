@@ -210,6 +210,24 @@ export class IMGProcessingClient {
   }
 
   /**
+   * Extracts the text from an image and returns its content in the `format` specified in the request.
+   *
+   * **Note:** This method is not available in test mode, since test watermarks prevent accurate text extraction. If you want to test the capabilities of this endpoint, please switch to live mode to use this feature, or contact support to temporarily upgrade your account.
+   */
+  async extractFormattedText({
+    image_id,
+    format,
+  }: IMGProcessingClient.extractFormattedText.Params): Promise<IMGProcessingClient.extractFormattedText.Response> {
+    return this.request(() =>
+      this.client.post(`v1/images/${image_id}/extract-formatted-text`, {
+        json: {
+          format,
+        },
+      }),
+    );
+  }
+
+  /**
    * Visualize an image using a pre-trained model and generate an answer based on the prompt.
    * The prompt can be a question, statement, or any text that you want to ask about the image. The API will analyze the content of the image and generate a response based on the prompt
    * using a pre-trained model.
@@ -311,7 +329,7 @@ export class IMGProcessingClient {
     negative_prompt,
     name,
     seed,
-    model
+    model,
   }: IMGProcessingClient.imagine.Params): Promise<ImageObject> {
     return this.imageRequest(() =>
       this.client.post<ImageObject>("v1/images/imagine", {
@@ -320,7 +338,7 @@ export class IMGProcessingClient {
           negative_prompt,
           name,
           seed,
-          model
+          model,
         },
       }),
     );
@@ -622,7 +640,7 @@ export declare namespace IMGProcessingClient {
       /** The seed to use for the generation. */
       seed?: number;
       /** The model to use for the generation. */
-      model?: "sdxl" | "flux"
+      model?: "sdxl" | "flux";
     };
   }
 
@@ -879,6 +897,21 @@ export declare namespace IMGProcessingClient {
     export type Response = {
       /** The lines of text extracted from the image. */
       lines: string[];
+    };
+  }
+
+  export namespace extractFormattedText {
+    export type Params = {
+      /** The ID of the image to extract text. */
+      image_id: ImageId;
+      /** The format of the text to extract. */
+      format?: "plain" | "markdown";
+    };
+    export type Response = {
+      /** The format of the response. Default is `plain`. */
+      format: "plain" | "markdown";
+      /** The content extracted from the image. */
+      content: string;
     };
   }
 }
