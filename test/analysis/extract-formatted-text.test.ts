@@ -6,7 +6,7 @@ import {
 } from "../../src/index.js";
 import { getApiKey, getAsset } from "../test-helpers.js";
 
-describe("extract text", () => {
+describe("extract formatted text", () => {
   const client: IMGProcessingClient = new IMGProcessingClient({
     apiKey: getApiKey(),
   });
@@ -18,8 +18,10 @@ describe("extract text", () => {
     });
   });
   test("should extract text from an image", async () => {
-    const { lines } = await uploadedImage.extractText();
-    expect(lines).toBeDefined();
-    expect(lines).toEqual(expect.arrayContaining([expect.any(String)]));
+    const response = await uploadedImage.extractFormattedText();
+    expect(response).toMatchObject({
+      format: "plain",
+      content: expect.any(String),
+    });
   });
 });
