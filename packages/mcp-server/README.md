@@ -9,8 +9,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 Because it's not published yet, clone the repo and build it:
 
 ```sh
-git clone git@github.com:img-processing/img-processing-typescript.git
-cd img-processing-typescript
+git clone git@github.com:img-processing/node-sdk.git
+cd node-sdk
 ./scripts/bootstrap
 ./scripts/build
 ```
@@ -40,11 +40,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "img_processing_api": {
       "command": "node",
-      "args": [
-        "/path/to/local/img-processing-typescript/packages/mcp-server",
-        "--client=claude",
-        "--tools=dynamic"
-      ],
+      "args": ["/path/to/local/node-sdk/packages/mcp-server", "--client=claude", "--tools=dynamic"],
       "env": {
         "IMG_PROCESSING_API_KEY": "My API Key"
       }
