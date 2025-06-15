@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.1.0 (2025-06-15)
+
+Full Changelog: [v2.0.0...v2.1.0](https://github.com/img-processing/node-sdk/compare/v2.0.0...v2.1.0)
+
+### Features
+
+* **api:** update via SDK Studio ([8e27f15](https://github.com/img-processing/node-sdk/commit/8e27f158dd6dbc708417820b232fc5046e72613d))
+
+
+### Chores
+
+* configure new SDK language ([4b9af94](https://github.com/img-processing/node-sdk/commit/4b9af947d0f1bd5c7e355b90ad522439bf7cfafb))
+
 ## 2.0.0 (2025-06-15)
 
 Full Changelog: [v1.4.0...v2.0.0](https://github.com/img-processing/node-sdk/compare/v1.4.0...v2.0.0)
