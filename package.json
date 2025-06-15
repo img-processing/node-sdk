@@ -1,5 +1,5 @@
 {
-  "name": "img-processing",
+  "name": "img-processing-sdk",
   "version": "1.4.0",
   "description": "The official TypeScript library for the Img Processing API",
   "author": "Img Processing <>",
@@ -47,8 +47,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "img-processing": ".",
-    "img-processing/*": "./src/*"
+    "img-processing-sdk": ".",
+    "img-processing-sdk/*": "./src/*"
   },
   "exports": {
     ".": {

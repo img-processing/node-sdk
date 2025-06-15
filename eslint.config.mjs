@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^img-processing(/.*)?',
+              regex: '^img-processing-sdk(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

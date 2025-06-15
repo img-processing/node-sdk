@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^img-processing$': '<rootDir>/src/index.ts',
-    '^img-processing/(.*)$': '<rootDir>/src/$1',
+    '^img-processing-sdk$': '<rootDir>/src/index.ts',
+    '^img-processing-sdk/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

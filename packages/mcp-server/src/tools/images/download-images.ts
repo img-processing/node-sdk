@@ -4,7 +4,7 @@ import { asBinaryContentResult } from 'img-processing-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import type { Metadata } from '../';
-import ImgProcessing from 'img-processing';
+import ImgProcessing from 'img-processing-sdk';
 
 export const metadata: Metadata = {
   resource: 'images',

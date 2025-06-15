@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ImgProcessing, { toFile } from 'img-processing';
+import ImgProcessing, { toFile } from 'img-processing-sdk';
 
 const client = new ImgProcessing({
   apiKey: 'My API Key',
