@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "img-processing-mcp/*": ["dist/src/*"],
-      "img-processing-mcp": ["dist/src/index.ts"]
+      "img-processing-sdk-mcp/*": ["dist/src/*"],
+      "img-processing-sdk-mcp": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
