@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Img Processing REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.img-processing.com](https://docs.img-processing.com). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -26,7 +26,7 @@ const client = new ImgProcessing({
   apiKey: process.env['IMG_PROCESSING_API_KEY'], // This is the default and can be omitted
 });
 
-const imageObject = await client.images.retrieve('REPLACE_ME');
+const imageObject = await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2');
 
 console.log(imageObject.id);
 ```
@@ -43,7 +43,7 @@ const client = new ImgProcessing({
   apiKey: process.env['IMG_PROCESSING_API_KEY'], // This is the default and can be omitted
 });
 
-const imageObject: ImgProcessing.ImageObject = await client.images.retrieve('REPLACE_ME');
+const imageObject: ImgProcessing.ImageObject = await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2');
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -85,7 +85,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const imageObject = await client.images.retrieve('REPLACE_ME').catch(async (err) => {
+const imageObject = await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2').catch(async (err) => {
   if (err instanceof ImgProcessing.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -125,7 +125,7 @@ const client = new ImgProcessing({
 });
 
 // Or, configure per-request:
-await client.images.retrieve('REPLACE_ME', {
+await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2', {
   maxRetries: 5,
 });
 ```
@@ -142,7 +142,7 @@ const client = new ImgProcessing({
 });
 
 // Override per-request:
-await client.images.retrieve('REPLACE_ME', {
+await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2', {
   timeout: 5 * 1000,
 });
 ```
@@ -165,11 +165,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new ImgProcessing();
 
-const response = await client.images.retrieve('REPLACE_ME').asResponse();
+const response = await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: imageObject, response: raw } = await client.images.retrieve('REPLACE_ME').withResponse();
+const { data: imageObject, response: raw } = await client.images
+  .retrieve('image_etm0g3x5iap4cld1qcfsjvo2')
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(imageObject.id);
 ```
