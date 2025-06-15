@@ -1,0 +1,4 @@
+configured_endpoints: 21
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/img-processing%2Fimg-processing-2de16cb63c6e31ae917f726c2e0b8bab9436e89a456ef3f9636651e903d511bf.yml
+openapi_spec_hash: f188c6f08bb6b11749c2e76727e27d21
+config_hash: f327ea036a3e2b5b5d2deec6bea734bc

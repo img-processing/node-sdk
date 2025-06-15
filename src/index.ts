@@ -1,4 +1,22 @@
-export * from "./image-object.js";
-export * from "./api-client.js";
-export * from "./paginated-images.js";
-export * from "./api-error.js";
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+export { ImgProcessing as default } from './client';
+
+export { type Uploadable, toFile } from './core/uploads';
+export { APIPromise } from './core/api-promise';
+export { ImgProcessing, type ClientOptions } from './client';
+export {
+  ImgProcessingError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} from './core/error';
