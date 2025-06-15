@@ -10,7 +10,7 @@ You can run the MCP Server directly via `npx`:
 
 ```sh
 export IMG_PROCESSING_API_KEY="My API Key"
-npx -y img-processing-mcp@latest
+npx -y img-processing-sdk-mcp@latest
 ```
 
 ### Via MCP Client
@@ -25,7 +25,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "img_processing_sdk_api": {
       "command": "npx",
-      "args": ["-y", "img-processing-mcp", "--client=claude", "--tools=dynamic"],
+      "args": ["-y", "img-processing-sdk-mcp", "--client=claude", "--tools=dynamic"],
       "env": {
         "IMG_PROCESSING_API_KEY": "My API Key"
       }
@@ -130,10 +130,10 @@ over time, you can manually enable or disable certain capabilities:
 
 ```js
 // Import the server, generated endpoints, or the init function
-import { server, endpoints, init } from "img-processing-mcp/server";
+import { server, endpoints, init } from "img-processing-sdk-mcp/server";
 
 // import a specific tool
-import retrieveImages from "img-processing-mcp/tools/images/retrieve-images";
+import retrieveImages from "img-processing-sdk-mcp/tools/images/retrieve-images";
 
 // initialize the server and all endpoints
 init({ server, endpoints });
