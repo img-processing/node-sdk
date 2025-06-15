@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'img-processing/internal/uploads';
-import { toFile } from 'img-processing/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'img-processing-sdk/internal/uploads';
+import { toFile } from 'img-processing-sdk/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

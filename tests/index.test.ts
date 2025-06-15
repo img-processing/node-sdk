@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'img-processing/core/api-promise';
+import { APIPromise } from 'img-processing-sdk/core/api-promise';
 
 import util from 'node:util';
-import ImgProcessing from 'img-processing';
-import { APIUserAbortError } from 'img-processing';
+import ImgProcessing from 'img-processing-sdk';
+import { APIUserAbortError } from 'img-processing-sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

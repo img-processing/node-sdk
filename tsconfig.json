@@ -9,8 +9,8 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "img-processing/*": ["src/*"],
-      "img-processing": ["src/index.ts"]
+      "img-processing-sdk/*": ["src/*"],
+      "img-processing-sdk": ["src/index.ts"]
     },
     "noEmit": true,
 
