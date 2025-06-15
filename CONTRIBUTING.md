@@ -42,15 +42,15 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ npm install git+ssh://git@github.com:img-processing/img-processing-typescript.git
+$ npm install git+ssh://git@github.com:img-processing/node-sdk.git
 ```
 
 Alternatively, to link a local copy of the repo:
 
 ```sh
 # Clone
-$ git clone https://www.github.com/img-processing/img-processing-typescript
-$ cd img-processing-typescript
+$ git clone https://www.github.com/img-processing/node-sdk
+$ cd node-sdk
 
 # With yarn
 $ yarn link
