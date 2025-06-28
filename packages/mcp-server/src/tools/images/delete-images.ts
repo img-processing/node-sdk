@@ -33,8 +33,8 @@ export const tool: Tool = {
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
   const { image_id, ...body } = args as any;
-  await client.images.delete(image_id);
-  return asTextContentResult('Successful tool call');
+  const response = await client.images.delete(image_id).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };
