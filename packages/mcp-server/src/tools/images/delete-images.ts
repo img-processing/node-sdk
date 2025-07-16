@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { asTextContentResult } from 'img-processing-sdk-mcp/tools/types';
+import { Metadata, asTextContentResult } from 'img-processing-sdk-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import type { Metadata } from '../';
 import ImgProcessing from 'img-processing-sdk';
 
 export const metadata: Metadata = {
