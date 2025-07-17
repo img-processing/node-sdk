@@ -28,11 +28,7 @@ export const server = new McpServer(
     name: 'img_processing_sdk_api',
     version: '2.1.0',
   },
-  {
-    capabilities: {
-      tools: {},
-    },
-  },
+  { capabilities: { tools: {} } },
 );
 
 /**
