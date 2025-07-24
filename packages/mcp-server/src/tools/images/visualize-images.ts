@@ -47,6 +47,7 @@ export const tool: Tool = {
     },
     required: ['image_id', 'prompt'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
