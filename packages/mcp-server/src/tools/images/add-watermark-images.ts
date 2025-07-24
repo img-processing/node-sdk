@@ -80,6 +80,7 @@ export const tool: Tool = {
     },
     required: ['image_id', 'watermarks'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
