@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { asTextContentResult } from 'img-processing-sdk-mcp/tools/types';
+import { Metadata, asTextContentResult } from 'img-processing-sdk-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import type { Metadata } from '../';
 import ImgProcessing from 'img-processing-sdk';
 
 export const metadata: Metadata = {
@@ -28,13 +27,17 @@ export const tool: Tool = {
           'The unique identifier of the image. This identifier is used to reference the image in subsequent requests.',
       },
     },
+    required: ['image_id'],
+  },
+  annotations: {
+    idempotentHint: true,
   },
 };
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
   const { image_id, ...body } = args as any;
-  await client.images.delete(image_id);
-  return asTextContentResult('Successful tool call');
+  const response = await client.images.delete(image_id).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };

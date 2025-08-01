@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { asBinaryContentResult } from 'img-processing-sdk-mcp/tools/types';
+import { Metadata, asBinaryContentResult } from 'img-processing-sdk-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import type { Metadata } from '../';
 import ImgProcessing from 'img-processing-sdk';
 
 export const metadata: Metadata = {
@@ -28,6 +27,10 @@ export const tool: Tool = {
           'The unique identifier of the image. This identifier is used to reference the image in subsequent requests.',
       },
     },
+    required: ['image_id'],
+  },
+  annotations: {
+    readOnlyHint: true,
   },
 };
 
