@@ -42,8 +42,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
-  const { image_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.images.retrieve(image_id)));
+  const { image_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.images.retrieve(image_id)));
 };
 
 export default { metadata, tool, handler };
