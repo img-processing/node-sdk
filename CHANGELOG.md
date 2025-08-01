@@ -1,5 +1,44 @@
 # Changelog
 
+## 2.2.0 (2025-08-01)
+
+Full Changelog: [v2.1.0...v2.2.0](https://github.com/img-processing/node-sdk/compare/v2.1.0...v2.2.0)
+
+### Features
+
+* **client:** add support for endpoint-specific base URLs ([c69b98a](https://github.com/img-processing/node-sdk/commit/c69b98a63138870bb7b7bac897673bc211d0a7b2))
+* **mcp:** fallback for void-typed methods ([e4b9556](https://github.com/img-processing/node-sdk/commit/e4b9556e68eeeec8618607f993213523b2ca4859))
+* **mcp:** support filtering tool results by a jq expression ([870cf5a](https://github.com/img-processing/node-sdk/commit/870cf5a7a7565596279fa2fe993617c768f4b494))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([5a6dda2](https://github.com/img-processing/node-sdk/commit/5a6dda2c0831c26fb4dca943f94a9bbb642e5591))
+* **client:** explicitly copy fetch in withOptions ([62a5487](https://github.com/img-processing/node-sdk/commit/62a5487820d0d83796ea89d08d57c8d6af333700))
+* **client:** get fetchOptions type more reliably ([4b7dc60](https://github.com/img-processing/node-sdk/commit/4b7dc60c9fb7b05ef88ce8c58ffc14b1fab7b753))
+* **mcp:** avoid sending `jq_filter` to base API ([e6427b0](https://github.com/img-processing/node-sdk/commit/e6427b0949ccde76f636a042c3a7c6f4d017803a))
+* **mcp:** include required section for top-level properties and support naming transformations ([c93cd13](https://github.com/img-processing/node-sdk/commit/c93cd130fd7099d714e25c0b65d36d16b77a366b))
+* **mcp:** relax input type for asTextContextResult ([7aff7b0](https://github.com/img-processing/node-sdk/commit/7aff7b0efaf6c0e8a13f8f882966e871cfe3bf03))
+* **mcp:** reverse validJson capability option and limit scope ([85b5844](https://github.com/img-processing/node-sdk/commit/85b58449a5f703794470c098f5e394770f8af67c))
+* **mcp:** support jq filtering on cloudflare workers ([2b2d8b1](https://github.com/img-processing/node-sdk/commit/2b2d8b11247e18d00e8d78aeeb28fcb592837671))
+
+
+### Chores
+
+* add docs to RequestOptions type ([6b5e96d](https://github.com/img-processing/node-sdk/commit/6b5e96d86103b71a27a33f88d9702eddd008a8dd))
+* **ci:** enable for pull requests ([3793afa](https://github.com/img-processing/node-sdk/commit/3793afaeb12c490cfa97092bff0194113cd24d4e))
+* **ci:** only run for pushes and fork pull requests ([90253d0](https://github.com/img-processing/node-sdk/commit/90253d09879bfeda456b9907617d84d4249a3068))
+* **client:** improve path param validation ([eaa64ef](https://github.com/img-processing/node-sdk/commit/eaa64ef68f2ee965cbb6e809750db0526de855c2))
+* **client:** refactor imports ([5230c08](https://github.com/img-processing/node-sdk/commit/5230c082fe867c9f52d4445112c0167a149b7981))
+* **internal:** codegen related update ([00385f2](https://github.com/img-processing/node-sdk/commit/00385f233285d0c88aaaf576099fa520b0298076))
+* **internal:** remove redundant imports config ([8a962ba](https://github.com/img-processing/node-sdk/commit/8a962bafdf361cc3b94214804de67a45c556b0e1))
+* make some internal functions async ([1d04b51](https://github.com/img-processing/node-sdk/commit/1d04b51f56d24ddba0ffc46f3e27558e4173ff13))
+* **mcp:** formatting ([f603037](https://github.com/img-processing/node-sdk/commit/f603037e658fcf541a1154689ba2890dba401888))
+* **mcp:** rework imports in tools ([46bcee5](https://github.com/img-processing/node-sdk/commit/46bcee57c247c2958f486ac38f07c35a498085d2))
+* **readme:** update badges ([9140b23](https://github.com/img-processing/node-sdk/commit/9140b2343a4680fffec2654f5abdfb05abcb8d52))
+* **readme:** use better example snippet for undocumented params ([7aab77f](https://github.com/img-processing/node-sdk/commit/7aab77f822ded35771e3c5047dddef4fd694e371))
+* **ts:** reorder package.json imports ([a87bc9a](https://github.com/img-processing/node-sdk/commit/a87bc9aa3cd78c99a410bdb0747d4f42df9e0cc4))
+
 ## 2.1.0 (2025-06-15)
 
 Full Changelog: [v2.0.0...v2.1.0](https://github.com/img-processing/node-sdk/compare/v2.0.0...v2.1.0)
