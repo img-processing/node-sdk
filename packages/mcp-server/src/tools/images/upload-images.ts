@@ -4,7 +4,8 @@ import { maybeFilter } from 'img-processing-mcp/filtering';
 import { Metadata, asTextContentResult } from 'img-processing-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import ImgProcessing from 'img-processing-sdk';
+import ImgProcessing, { Uploadable } from 'img-processing-sdk';
+import * as fs from 'node:fs';
 
 export const metadata: Metadata = {
   resource: 'images',
@@ -44,8 +45,40 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
-  const { jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.images.upload(body)));
+  const { jq_filter, ...body } = args as {
+    jq_filter: Record<string, unknown>;
+    image: string;
+    name: string;
+  };
+  if (!body.image || typeof body.image !== 'string') {
+    throw new Error('The "image" field is required and must be a file path or a URL to an image.');
+  }
+  let isUrl = body.image.startsWith('http://') || body.image.startsWith('https://');
+  let uploadable: Uploadable;
+  if (isUrl) {
+    const response = await fetch(body.image);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch the file from URL: ${body.image}. Status: ${response.status}`);
+    }
+    uploadable = await response.blob();
+  } else {
+    if (!fs.existsSync(body.image)) {
+      throw new Error(`File not found: ${body.image}. Verify the path or url is correct.`);
+    }
+    if (!fs.statSync(body.image).isFile()) {
+      throw new Error(`The path provided is not a file: ${body.image}`);
+    }
+    uploadable = fs.createReadStream(body.image);
+  }
+  return asTextContentResult(
+    await maybeFilter(
+      jq_filter,
+      await client.images.upload({
+        image: uploadable,
+        name: body.name || 'mcp-client-uploaded-image',
+      }),
+    ),
+  );
 };
 
 export default { metadata, tool, handler };
