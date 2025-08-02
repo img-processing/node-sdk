@@ -79,12 +79,18 @@ export const handler = async (client: ImgProcessing, args: Record<string, unknow
       type: mimeType,
     });
   }
+
+  const name = body.name || 'mcp-client-uploaded-image';
+  uploadable = new File([uploadable], name, {
+    type: uploadable.type,
+  });
+
   return asTextContentResult(
     await maybeFilter(
       jq_filter,
       await client.images.upload({
         image: uploadable,
-        name: body.name || 'mcp-client-uploaded-image',
+        name: name,
       }),
     ),
   );
