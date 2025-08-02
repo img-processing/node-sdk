@@ -68,7 +68,16 @@ export const handler = async (client: ImgProcessing, args: Record<string, unknow
     if (!fs.statSync(body.image).isFile()) {
       throw new Error(`The path provided is not a file: ${body.image}`);
     }
-    uploadable = fs.createReadStream(body.image);
+    // read the file and create a Blob with the correct mime type
+    const fileBuffer = fs.readFileSync(body.image);
+    const mimeType =
+      body.image.endsWith('.png') ? 'image/png'
+      : body.image.endsWith('.webp') ? 'image/webp'
+      : body.image.endsWith('.jpg') || body.image.endsWith('.jpeg') ? 'image/jpeg'
+      : 'application/octet-stream'; // default to binary if not recognized
+    uploadable = new Blob([fileBuffer], {
+      type: mimeType,
+    });
   }
   return asTextContentResult(
     await maybeFilter(
