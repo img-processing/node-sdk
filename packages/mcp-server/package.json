@@ -1,5 +1,5 @@
 {
-  "name": "img-processing-sdk-mcp",
+  "name": "img-processing-mcp",
   "version": "2.2.0",
   "description": "The official MCP Server for the Img Processing API",
   "author": "Img Processing <support@img-processing.com>",
@@ -55,8 +55,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "img-processing-sdk-mcp": ".",
-    "img-processing-sdk-mcp/*": "./src/*"
+    "img-processing-mcp": ".",
+    "img-processing-mcp/*": "./src/*"
   },
   "exports": {
     ".": {
