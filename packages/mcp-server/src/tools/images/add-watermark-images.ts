@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'img-processing-sdk-mcp/filtering';
-import { Metadata, asTextContentResult } from 'img-processing-sdk-mcp/tools/types';
+import { maybeFilter } from 'img-processing-mcp/filtering';
+import { Metadata, asTextContentResult } from 'img-processing-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import ImgProcessing from 'img-processing-sdk';
