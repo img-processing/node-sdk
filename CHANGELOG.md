@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.3.0 (2025-08-02)
+
+Full Changelog: [v2.2.0...v2.3.0](https://github.com/img-processing/node-sdk/compare/v2.2.0...v2.3.0)
+
+### Features
+
+* **api:** update via SDK Studio ([d3f17b5](https://github.com/img-processing/node-sdk/commit/d3f17b59c11713c1fff84c6d7920bca0d20c06ab))
+* **mcp:** add logging when environment variable is set ([c2200b1](https://github.com/img-processing/node-sdk/commit/c2200b1cb3be096fed0cb7fb06526f37998beee2))
+
 ## 2.2.0 (2025-08-01)
 
 Full Changelog: [v2.1.0...v2.2.0](https://github.com/img-processing/node-sdk/compare/v2.1.0...v2.2.0)
