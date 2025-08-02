@@ -25,7 +25,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "img_processing_sdk_api": {
       "command": "npx",
-      "args": ["-y", "img-processing-mcp", "--client=claude", "--tools=dynamic"],
+      "args": ["-y", "img-processing-mcp", "--client=claude", "--tools=all"],
       "env": {
         "IMG_PROCESSING_API_KEY": "My API Key"
       }
@@ -196,10 +196,6 @@ The following tools are available in this MCP server.
   - PNG (Portable Network Graphics): A raster-graphics file format that supports lossless data compression. PNG is often used for images that require transparency or when the image quality must be preserved without any loss.
   - WebP: A modern image format that provides superior lossless and lossy compression for images on the web. WebP images are smaller in size compared to JPEG and PNG, while maintaining similar or better image quality
 
-- `create_from_url_images` (`write`): The first step to start processing images with the IMG Processing API is to create an Image Object. You can create an Image object by uploading an image file or by providing a URL to an existing image.
-
-  This endpoint allows you to create an Image object by providing a URL to an existing image. The API will download the image from the provided URL, so make sure the URL is accessible and the image is publicly available.
-
 - `crop_images` (`write`): With this endpoint, you can crop an image by specifying the dimensions of the crop area.
 
   The crop area is defined by 2 points: the top-left corner at (x1, y1) and the bottom-right corner at (x2, y2)
@@ -255,12 +251,7 @@ The following tools are available in this MCP server.
 
   After unpublishing an image, the url field of the image object will be updated with to null. You can still download the image using the Download Image endpoint.
 
-- `upload_images` (`write`): The first step to start processing images with the IMG Processing API is to create an Image Object. You can create an Image object by uploading an image file or by providing a URL to an existing image.
-
-  This endpoint allows you to create an Image object by uploading an image file.
-
-  To upload an image, you need to send a multipart/form-data request to the API with the image file as a File object stringified in the image field, and name field with the name of the image for identification purposes.
-
+- `upload_images` (`write`): Uploads a new file from the current file system (absolute path) or a remote url (http/https).
 - `visualize_images` (`write`): This endpoint returns a response based on the content of an image and a base prompt.
 
   The prompt can be a question, statement, or any text that you want to ask about the image. The API will analyze the content of the image and generate a response based on the prompt using a pre-trained model.

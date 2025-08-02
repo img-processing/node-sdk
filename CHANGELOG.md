@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.3.1 (2025-08-02)
+
+Full Changelog: [v2.3.0...v2.3.1](https://github.com/img-processing/node-sdk/compare/v2.3.0...v2.3.1)
+
+### Features
+
+* **api:** update via SDK Studio ([5e0e24a](https://github.com/img-processing/node-sdk/commit/5e0e24a179eeb5b7490305fecd975b2de9b8836e))
+
+
+### Bug Fixes
+
+* upload images ([0bc2f28](https://github.com/img-processing/node-sdk/commit/0bc2f28d1e715fc79ee6c584c0def00cf6c77bf4))
+
 ## 2.3.0 (2025-08-02)
 
 Full Changelog: [v2.2.0...v2.3.0](https://github.com/img-processing/node-sdk/compare/v2.2.0...v2.3.0)
