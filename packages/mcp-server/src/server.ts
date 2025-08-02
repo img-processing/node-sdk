@@ -26,7 +26,7 @@ export { endpoints } from './tools';
 export const server = new McpServer(
   {
     name: 'img_processing_sdk_api',
-    version: '2.3.2',
+    version: '2.3.3',
   },
   { capabilities: { tools: {}, logging: {} } },
 );
