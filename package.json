@@ -1,6 +1,6 @@
 {
   "name": "img-processing-sdk",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "The official TypeScript library for the Img Processing API",
   "author": "Img Processing <support@img-processing.com>",
   "types": "dist/index.d.ts",

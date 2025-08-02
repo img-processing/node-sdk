@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.2 (2025-08-02)
+
+Full Changelog: [v2.3.1...v2.3.2](https://github.com/img-processing/node-sdk/compare/v2.3.1...v2.3.2)
+
+### Bug Fixes
+
+* upload images tool ([#2](https://github.com/img-processing/node-sdk/issues/2)) ([3565f0d](https://github.com/img-processing/node-sdk/commit/3565f0dda3a0ed29edefc960060863bc4e89d7d6))
+
 ## 2.3.1 (2025-08-02)
 
 Full Changelog: [v2.3.0...v2.3.1](https://github.com/img-processing/node-sdk/compare/v2.3.0...v2.3.1)
