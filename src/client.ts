@@ -738,7 +738,9 @@ export class ImgProcessing {
 
   images: API.Images = new API.Images(this);
 }
+
 ImgProcessing.Images = Images;
+
 export declare namespace ImgProcessing {
   export type RequestOptions = Opts.RequestOptions;
 
