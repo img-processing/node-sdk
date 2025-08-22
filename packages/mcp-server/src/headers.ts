@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type ClientOptions } from 'img-processing-sdk/client';
-
 import { IncomingMessage } from 'node:http';
+import { ClientOptions } from 'img-processing-sdk';
 
 export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> => {
   const apiKey =
