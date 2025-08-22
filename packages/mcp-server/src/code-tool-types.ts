@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type ClientOptions } from 'img-processing-sdk/client';
+import { ClientOptions } from 'img-processing-sdk';
 
 export type WorkerInput = {
   opts: ClientOptions;
