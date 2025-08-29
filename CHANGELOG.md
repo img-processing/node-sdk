@@ -1,5 +1,42 @@
 # Changelog
 
+## 2.4.0 (2025-08-29)
+
+Full Changelog: [v2.3.3...v2.4.0](https://github.com/img-processing/node-sdk/compare/v2.3.3...v2.4.0)
+
+### Features
+
+* **mcp:** add code execution tool ([1e6e47f](https://github.com/img-processing/node-sdk/commit/1e6e47fc112ed1f4fa4aea3ee9e169f431a22bf1))
+* **mcp:** add option to infer mcp client ([1a28e8d](https://github.com/img-processing/node-sdk/commit/1a28e8d295b20d9fc36ab300b7c8ea6dff1950e6))
+* **mcp:** add unix socket option for remote MCP ([beb9dd4](https://github.com/img-processing/node-sdk/commit/beb9dd48f980afb651e8046d666a0dbf4be92e6b))
+* **mcp:** parse query string as mcp client options in mcp server ([6103b1b](https://github.com/img-processing/node-sdk/commit/6103b1b9d4fc2381717803cdcbfb77957f8859c9))
+* **mcp:** remote server with passthru auth ([b448966](https://github.com/img-processing/node-sdk/commit/b4489666ad7cd444ec4b2bbe28775a6ccd402bc4))
+
+
+### Chores
+
+* add package to package.json ([b2a1a45](https://github.com/img-processing/node-sdk/commit/b2a1a45fd1316f254c976a9493a39b0d313c868a))
+* **client:** qualify global Blob ([792a72d](https://github.com/img-processing/node-sdk/commit/792a72daac7498fdbac113f863b4e8f0b6edc62c))
+* **deps:** update dependency @types/node to v20.17.58 ([ad63e7b](https://github.com/img-processing/node-sdk/commit/ad63e7b9bcc1660e8f755d5b263c9d6cf7613ab5))
+* **internal:** codegen related update ([e5baf0e](https://github.com/img-processing/node-sdk/commit/e5baf0e86fe7f855f27379b0e80103df289a307f))
+* **internal:** codegen related update ([195cb9c](https://github.com/img-processing/node-sdk/commit/195cb9c3218de2d995f6e7c5662fd0551751067e))
+* **internal:** codegen related update ([235bda2](https://github.com/img-processing/node-sdk/commit/235bda2cc08877691f5c3e1f6f31da6db2a42537))
+* **internal:** formatting change ([7a289dc](https://github.com/img-processing/node-sdk/commit/7a289dc0129a6db46b90b7abe806713a076cc24b))
+* **internal:** make mcp-server publishing public by defaut ([b493034](https://github.com/img-processing/node-sdk/commit/b4930345e7268166a1a9f8cff5ed68b6ffa8a101))
+* **internal:** move publish config ([b03a102](https://github.com/img-processing/node-sdk/commit/b03a102678859ed5c2d0a49c762a4297f82a5e8e))
+* **internal:** refactor array check ([437ad15](https://github.com/img-processing/node-sdk/commit/437ad156ec381cae1858a627a6d07bfbe2456221))
+* **internal:** update comment in script ([343c9ab](https://github.com/img-processing/node-sdk/commit/343c9ab3c7fe13e06cafc9fa4db0700f59c5ab05))
+* **internal:** update global Error reference ([e78611f](https://github.com/img-processing/node-sdk/commit/e78611f130006a3ca8482de1f2ff747bbb35d051))
+* **mcp:** add cors to oauth metadata route ([49567de](https://github.com/img-processing/node-sdk/commit/49567de051340ae276b1cc11912e298a36a0cb1c))
+* **mcp:** document remote server in README.md ([81531a2](https://github.com/img-processing/node-sdk/commit/81531a2158ed50b1c098846b3114950f219ce779))
+* **mcp:** minor cleanup of types and package.json ([64fc7d2](https://github.com/img-processing/node-sdk/commit/64fc7d2f2b8990bafa2cb9928aece64f8044c368))
+* **mcp:** refactor streamable http transport ([6d1f099](https://github.com/img-processing/node-sdk/commit/6d1f099f3740a952409a11fe29412115aaa5aad0))
+* **mcp:** update package.json ([3e205e0](https://github.com/img-processing/node-sdk/commit/3e205e09432c5eb5488f52d8572bd2305f761714))
+* **mcp:** update README ([1d29e14](https://github.com/img-processing/node-sdk/commit/1d29e1483a17241d30d2f18d2242282aa826ce6f))
+* **mcp:** update types ([966b167](https://github.com/img-processing/node-sdk/commit/966b167ad9badb70b3e32dfdbf4d5bc494ae23aa))
+* update @stainless-api/prism-cli to v5.15.0 ([bf1ff9d](https://github.com/img-processing/node-sdk/commit/bf1ff9d7508d52d1455ce5bb7770476a1192513b))
+* update CI script ([0afb400](https://github.com/img-processing/node-sdk/commit/0afb400dbda3935f8c7dad1da6f87ab019665efc))
+
 ## 2.3.3 (2025-08-02)
 
 Full Changelog: [v2.3.2...v2.3.3](https://github.com/img-processing/node-sdk/compare/v2.3.2...v2.3.3)
