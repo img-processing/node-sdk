@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.5.0 (2025-09-06)
+
+Full Changelog: [v2.4.0...v2.5.0](https://github.com/img-processing/node-sdk/compare/v2.4.0...v2.5.0)
+
+### Features
+
+* **mcp:** allow setting logging level ([36435db](https://github.com/img-processing/node-sdk/commit/36435db6d60428f99fb0c091dc44f53e1926a3da))
+* **mcp:** expose client options in `streamableHTTPApp` ([e703796](https://github.com/img-processing/node-sdk/commit/e703796d8b841b4e5646c5b9454ddb81f88a1c64))
+
+
+### Bug Fixes
+
+* **mcp:** fix query options parsing ([e87c83f](https://github.com/img-processing/node-sdk/commit/e87c83f4dfdb17fbb22029ab6b1d0c7fa64c540e))
+
+
+### Chores
+
+* ci build action ([854760e](https://github.com/img-processing/node-sdk/commit/854760e576752a3a6179067c85f0423b59914a3f))
+* **internal:** codegen related update ([40e6528](https://github.com/img-processing/node-sdk/commit/40e65286601bc2914d4a0993a2098b25c9446c60))
+* **internal:** codegen related update ([913fa07](https://github.com/img-processing/node-sdk/commit/913fa0740c637f10708ee113fee1d46b7879e223))
+
 ## 2.4.0 (2025-08-29)
 
 Full Changelog: [v2.3.3...v2.4.0](https://github.com/img-processing/node-sdk/compare/v2.3.3...v2.4.0)
