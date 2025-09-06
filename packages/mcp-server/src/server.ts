@@ -33,7 +33,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'img_processing_sdk_api',
-      version: '2.4.0',
+      version: '2.5.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
