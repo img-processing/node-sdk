@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.5.1 (2025-09-09)
+
+Full Changelog: [v2.5.0...v2.5.1](https://github.com/img-processing/node-sdk/compare/v2.5.0...v2.5.1)
+
+### Bug Fixes
+
+* coerce nullable values to undefined ([2c327c2](https://github.com/img-processing/node-sdk/commit/2c327c2eb0617612dc319a9717a3df652178ab5b))
+
 ## 2.5.0 (2025-09-06)
 
 Full Changelog: [v2.4.0...v2.5.0](https://github.com/img-processing/node-sdk/compare/v2.4.0...v2.5.0)
