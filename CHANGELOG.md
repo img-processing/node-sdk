@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.5.2 (2025-09-12)
+
+Full Changelog: [v2.5.1...v2.5.2](https://github.com/img-processing/node-sdk/compare/v2.5.1...v2.5.2)
+
+### Bug Fixes
+
+* **mcp:** fix uploading dxt release assets ([d89bffa](https://github.com/img-processing/node-sdk/commit/d89bffac6fbce0d185b81e7a660ee1abb6e21b6b))
+
+
+### Chores
+
+* **mcp:** upload dxt as release asset ([5ee6ca4](https://github.com/img-processing/node-sdk/commit/5ee6ca4e70c310d4cb513a8925e5934cda36de25))
+
 ## 2.5.1 (2025-09-09)
 
 Full Changelog: [v2.5.0...v2.5.1](https://github.com/img-processing/node-sdk/compare/v2.5.0...v2.5.1)
