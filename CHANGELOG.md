@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.5.3 (2025-09-17)
+
+Full Changelog: [v2.5.2...v2.5.3](https://github.com/img-processing/node-sdk/compare/v2.5.2...v2.5.3)
+
+### Bug Fixes
+
+* **ci:** set permissions for DXT publish action ([9244a19](https://github.com/img-processing/node-sdk/commit/9244a19b3f90f2655c51bd469661f03c5fb9ed4a))
+
 ## 2.5.2 (2025-09-12)
 
 Full Changelog: [v2.5.1...v2.5.2](https://github.com/img-processing/node-sdk/compare/v2.5.1...v2.5.2)

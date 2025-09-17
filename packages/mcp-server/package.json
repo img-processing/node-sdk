@@ -1,6 +1,6 @@
 {
   "name": "img-processing-mcp",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "The official MCP Server for the Img Processing API",
   "author": "Img Processing <support@img-processing.com>",
   "types": "dist/index.d.ts",
