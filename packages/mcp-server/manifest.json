@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.1",
   "name": "img-processing-mcp",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "The official MCP Server for the Img Processing API",
   "author": {
     "name": "Img Processing",
