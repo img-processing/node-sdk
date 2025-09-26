@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "img-processing-mcp/*": ["src/*"],
-      "img-processing-mcp": ["src/index.ts"]
+      "img-processing-mcp/*": ["./src/*"],
+      "img-processing-mcp": ["./src/index.ts"]
     },
     "noEmit": true,
 
