@@ -1,5 +1,40 @@
 # Changelog
 
+## 2.6.0 (2025-09-30)
+
+Full Changelog: [v2.5.3...v2.6.0](https://github.com/img-processing/node-sdk/compare/v2.5.3...v2.6.0)
+
+### Features
+
+* **mcp:** add docs search tool ([8be76c0](https://github.com/img-processing/node-sdk/commit/8be76c040191266496a71d5b055c6a5a1136a41f))
+* **mcp:** add option for including docs tools ([3deacdc](https://github.com/img-processing/node-sdk/commit/3deacdca218bc3effdc0e440b1dc1774717bc914))
+* **mcp:** enable experimental docs search tool ([a687bac](https://github.com/img-processing/node-sdk/commit/a687baccbe8ed955de8195f663ebfcde24ab3720))
+
+
+### Bug Fixes
+
+* **mcp:** fix cli argument parsing logic ([b814bb7](https://github.com/img-processing/node-sdk/commit/b814bb79034688b1c1c605cc04e8cc3bbf73b277))
+* **mcp:** resolve a linting issue in server code ([15d421f](https://github.com/img-processing/node-sdk/commit/15d421feef63d56100053517971c5a9a52867796))
+
+
+### Performance Improvements
+
+* faster formatting ([2dc1660](https://github.com/img-processing/node-sdk/commit/2dc1660653b37ca4146679191482ceded0dc7aba))
+
+
+### Chores
+
+* **codegen:** internal codegen update ([ecc9e7e](https://github.com/img-processing/node-sdk/commit/ecc9e7e0e102622aefeb3c863dd71bb14784ae8e))
+* do not install brew dependencies in ./scripts/bootstrap by default ([5f8b3e0](https://github.com/img-processing/node-sdk/commit/5f8b3e00601c453233e1b4475a6293ab37c8bf55))
+* **internal:** codegen related update ([42a6b13](https://github.com/img-processing/node-sdk/commit/42a6b13b0b8caaa20df0752c4e5be08cc2b10a82))
+* **internal:** fix incremental formatting in some cases ([49d023b](https://github.com/img-processing/node-sdk/commit/49d023bf5b8562cf88700aeda86ed14eb2a06cfe))
+* **internal:** gitignore .mcpb files ([130ad87](https://github.com/img-processing/node-sdk/commit/130ad8701491fa3ed7f68226a51268147dfdcb39))
+* **internal:** ignore .eslintcache ([d7f6709](https://github.com/img-processing/node-sdk/commit/d7f670940ebd4547425525a89e18596e52f48094))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([8b0e56f](https://github.com/img-processing/node-sdk/commit/8b0e56fa90c68ffcef9e70f70043e08bf24f13f6))
+* **mcp:** allow pointing `docs_search` tool at other URLs ([8a21174](https://github.com/img-processing/node-sdk/commit/8a211748b82b0b0726613b7e7f679b93abbff801))
+* **mcp:** rename dxt to mcpb ([9db2106](https://github.com/img-processing/node-sdk/commit/9db2106212631a5f60a16455c7141834e22a3016))
+* update lockfile ([02bd395](https://github.com/img-processing/node-sdk/commit/02bd3954242cf4ae9b90e01f082dde53debbda98))
+
 ## 2.5.3 (2025-09-17)
 
 Full Changelog: [v2.5.2...v2.5.3](https://github.com/img-processing/node-sdk/compare/v2.5.2...v2.5.3)
