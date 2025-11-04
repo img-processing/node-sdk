@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.6.1 (2025-11-04)
+
+Full Changelog: [v2.6.0...v2.6.1](https://github.com/img-processing/node-sdk/compare/v2.6.0...v2.6.1)
+
+### Bug Fixes
+
+* **mcpb:** pin @anthropic-ai/mcpb version ([875a63a](https://github.com/img-processing/node-sdk/commit/875a63aeb368c3daaca51c9e3c17479c5348ea3b))
+
+
+### Chores
+
+* extract some types in mcp docs ([026875f](https://github.com/img-processing/node-sdk/commit/026875fe048d24dcd76b614b1bdb2b1d56b88988))
+* **internal:** grammar fix (it's -&gt; its) ([86f67a8](https://github.com/img-processing/node-sdk/commit/86f67a8c85cdfe1283c5c22b9eed4ce9f4ffa346))
+* **internal:** remove .eslintcache ([3972703](https://github.com/img-processing/node-sdk/commit/3972703e0ca4e9000cdfdbf02cded01ee829cbeb))
+* **internal:** use npm pack for build uploads ([f864d68](https://github.com/img-processing/node-sdk/commit/f864d687e5784ee7dcb64a2b19252ce56c6ea35c))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([bade83b](https://github.com/img-processing/node-sdk/commit/bade83b11bde90ff5d3dd70fc27a9c0212aad9f9))
+
 ## 2.6.0 (2025-09-30)
 
 Full Changelog: [v2.5.3...v2.6.0](https://github.com/img-processing/node-sdk/compare/v2.5.3...v2.6.0)
