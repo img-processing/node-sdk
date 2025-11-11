@@ -1,5 +1,35 @@
 # Changelog
 
+## 2.7.0 (2025-11-11)
+
+Full Changelog: [v2.6.1...v2.7.0](https://github.com/img-processing/node-sdk/compare/v2.6.1...v2.7.0)
+
+### Features
+
+* **mcp:** enable optional code execution tool on http mcp servers ([52c45d3](https://github.com/img-processing/node-sdk/commit/52c45d363bb43243c6b19970e6b7698d62868412))
+
+
+### Bug Fixes
+
+* **mcp:** use raw responses for binary content ([17cbe15](https://github.com/img-processing/node-sdk/commit/17cbe1565fd69b2f3d930175030ee834699b1da2))
+
+
+### Chores
+
+* **internal:** codegen related update ([d44900b](https://github.com/img-processing/node-sdk/commit/d44900ba5c9d845ccd8673e92002a7de66eb289a))
+* **internal:** codegen related update ([ecd24b3](https://github.com/img-processing/node-sdk/commit/ecd24b3aaaefeefeb08de07c7f28f83a3234a5ba))
+* mcp code tool explicit error message when missing a run function ([2c14dac](https://github.com/img-processing/node-sdk/commit/2c14dac7a2f9e52035e72581d46dc9869cb129c4))
+* **mcp:** add friendlier MCP code tool errors on incorrect method invocations ([9a39f89](https://github.com/img-processing/node-sdk/commit/9a39f89ff51947bd77a1d9600f1879bbb5c27fcb))
+* **mcp:** add line numbers to code tool errors ([9dfdfb9](https://github.com/img-processing/node-sdk/commit/9dfdfb9100731248a15c8246f169e0988652d11b))
+* **mcp:** clarify http auth error ([af547a4](https://github.com/img-processing/node-sdk/commit/af547a4318b5b1be26b37a0165c4d640f5cd6663))
+* use structured error when code execution tool errors ([42e8106](https://github.com/img-processing/node-sdk/commit/42e8106efcaf55589734a3c3a21aa6385dd8ca97))
+
+
+### Documentation
+
+* **mcp:** add a README button for one-click add to Cursor ([3212159](https://github.com/img-processing/node-sdk/commit/321215915c782b7d53b6d7efaa2e60d95c25d3fc))
+* **mcp:** add a README link to add server to VS Code or Claude Code ([619d4a0](https://github.com/img-processing/node-sdk/commit/619d4a066e003ca4b3f4ae59e5a74a0b388c4d81))
+
 ## 2.6.1 (2025-11-04)
 
 Full Changelog: [v2.6.0...v2.6.1](https://github.com/img-processing/node-sdk/compare/v2.6.0...v2.6.1)
