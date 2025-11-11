@@ -36,7 +36,7 @@ export const tool: Tool = {
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
   const { image_id, ...body } = args as any;
-  return asBinaryContentResult(await client.images.download(image_id));
+  return asBinaryContentResult(await client.images.download(image_id).asResponse());
 };
 
 export default { metadata, tool, handler };
