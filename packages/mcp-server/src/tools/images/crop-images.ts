@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'img-processing-mcp/filtering';
-import { Metadata, asTextContentResult } from 'img-processing-mcp/tools/types';
+import { isJqError, maybeFilter } from 'img-processing-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'img-processing-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import ImgProcessing from 'img-processing-sdk';
@@ -61,7 +61,14 @@ export const tool: Tool = {
 
 export const handler = async (client: ImgProcessing, args: Record<string, unknown> | undefined) => {
   const { image_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.images.crop(image_id, body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.images.crop(image_id, body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };
