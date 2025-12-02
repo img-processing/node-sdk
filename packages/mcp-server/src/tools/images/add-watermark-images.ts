@@ -90,7 +90,7 @@ export const handler = async (client: ImgProcessing, args: Record<string, unknow
       await maybeFilter(jq_filter, await client.images.addWatermark(image_id, body)),
     );
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof ImgProcessing.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;
