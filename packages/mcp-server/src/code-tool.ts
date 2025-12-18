@@ -35,7 +35,10 @@ export async function codeTool() {
       headers: {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
-        client_envs: JSON.stringify({ IMG_PROCESSING_API_KEY: readEnv('IMG_PROCESSING_API_KEY') }),
+        client_envs: JSON.stringify({
+          IMG_PROCESSING_API_KEY: readEnv('IMG_PROCESSING_API_KEY'),
+          IMG_PROCESSING_BASE_URL: readEnv('IMG_PROCESSING_BASE_URL'),
+        }),
       },
       body: JSON.stringify({
         project_name: 'img-processing',
