@@ -54,7 +54,7 @@ If you use Claude Code, you can install the MCP server by running the command be
 environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
 
 ```
-claude mcp add --transport stdio img_processing_sdk_api --env IMG_PROCESSING_API_KEY="Your IMG_PROCESSING_API_KEY here." -- npx -y img-processing-mcp
+claude mcp add img_processing_mcp_api --env IMG_PROCESSING_API_KEY="Your IMG_PROCESSING_API_KEY here." -- npx -y img-processing-mcp
 ```
 
 ## Code Mode
