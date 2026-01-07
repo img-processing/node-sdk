@@ -193,7 +193,12 @@ export class Images extends APIResource {
    * ```ts
    * const imageObject = await client.images.crop(
    *   'image_etm0g3x5iap4cld1qcfsjvo2',
-   *   { x1: 0, x2: 0, y1: 0, y2: 0 },
+   *   {
+   *     x1: 0,
+   *     x2: 0,
+   *     y1: 0,
+   *     y2: 0,
+   *   },
    * );
    * ```
    */

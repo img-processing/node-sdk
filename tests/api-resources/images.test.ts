@@ -69,7 +69,16 @@ describe('resource images', () => {
   // Prism tests are disabled
   test.skip('addWatermark: required and optional params', async () => {
     const response = await client.images.addWatermark('image_etm0g3x5iap4cld1qcfsjvo2', {
-      watermarks: [{ id: 'id', height: 1, left: 0, repetition_mode: 'repeat', top: 0, width: 1 }],
+      watermarks: [
+        {
+          id: 'id',
+          height: 1,
+          left: 0,
+          repetition_mode: 'repeat',
+          top: 0,
+          width: 1,
+        },
+      ],
       name: 'x',
     });
   });
@@ -270,7 +279,13 @@ describe('resource images', () => {
     await expect(
       client.images.modulate(
         'image_etm0g3x5iap4cld1qcfsjvo2',
-        { brightness: -100, contrast: -100, exposure: -100, name: 'x', saturation: -100 },
+        {
+          brightness: -100,
+          contrast: -100,
+          exposure: -100,
+          name: 'x',
+          saturation: -100,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ImgProcessing.NotFoundError);

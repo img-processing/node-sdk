@@ -52,7 +52,9 @@ const client = new ImgProcessing({
   apiKey: process.env['IMG_PROCESSING_API_KEY'], // This is the default and can be omitted
 });
 
-const imageObject: ImgProcessing.ImageObject = await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2');
+const imageObject: ImgProcessing.ImageObject = await client.images.retrieve(
+  'image_etm0g3x5iap4cld1qcfsjvo2',
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -82,8 +84,14 @@ await client.images.upload({ image: new File(['my bytes'], 'file'), name: 'examp
 await client.images.upload({ image: await fetch('https://somesite/file'), name: 'example-image' });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.images.upload({ image: await toFile(Buffer.from('my bytes'), 'file'), name: 'example-image' });
-await client.images.upload({ image: await toFile(new Uint8Array([0, 1, 2]), 'file'), name: 'example-image' });
+await client.images.upload({
+  image: await toFile(Buffer.from('my bytes'), 'file'),
+  name: 'example-image',
+});
+await client.images.upload({
+  image: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+  name: 'example-image',
+});
 ```
 
 ## Handling errors
@@ -94,15 +102,17 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const imageObject = await client.images.retrieve('image_etm0g3x5iap4cld1qcfsjvo2').catch(async (err) => {
-  if (err instanceof ImgProcessing.APIError) {
-    console.log(err.status); // 400
-    console.log(err.name); // BadRequestError
-    console.log(err.headers); // {server: 'nginx', ...}
-  } else {
-    throw err;
-  }
-});
+const imageObject = await client.images
+  .retrieve('image_etm0g3x5iap4cld1qcfsjvo2')
+  .catch(async (err) => {
+    if (err instanceof ImgProcessing.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
